@@ -94,18 +94,20 @@
 
 
 
-<meta name="description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Coverage">
+<meta name="description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
 <meta name="keywords" content="Code Coverage, CI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
 <meta property="og:url" content="http://yoursite.com/2017/10/22/2017.10.22/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Coverage">
+<meta property="og:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-22T09:51:42.683Z">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/public/images/codecoverage.PNG?raw=true">
+<meta property="og:updated_time" content="2017-10-22T11:22:33.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta name="twitter:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Coverage">
+<meta name="twitter:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
+<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/public/images/codecoverage.PNG?raw=true">
 
 
 
@@ -373,18 +375,36 @@
       
 
       
-        <p>由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。<br>Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。</p>
-<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="" alt=""></p>
+        <blockquote>
+<p>由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。</p>
+</blockquote>
+<p><strong>Code Coverage</strong>，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。</p>
+<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/public/images/codecoverage.PNG?raw=true" alt=""></p>
 <ol>
 <li>Instrument，可以理解为配备或准备的意思，这一步使用的工具Vsinstr.exe，它需要将被测程序集名称作为参数，主要作用是将需要测量的程序集分块，并插入监听程序，在这个工程中，需要程序集对应的PDB文件。</li>
 <li>开启监听，并收集覆盖率。这一步用到的工具是Vsperfcmd.exe，它会开启一个监听程序Vsperfmon.exe,当Instrumented的程序集被覆盖到时，会Vsperfmon.exe会收到通知。</li>
-<li>是运行测试用例。</li>
+<li>运行测试用例。</li>
 <li>使用Vsperfcmd，输入与上面不同的参数，停止监听，生成Code Coverage报告。</li>
 </ol>
 <h2 id="遵循这四步的Workflow"><a href="#遵循这四步的Workflow" class="headerlink" title="遵循这四步的Workflow"></a>遵循这四步的Workflow</h2><ol>
 <li>首先安装需要分析Code Coverage的产品</li>
 <li>将PDB拷贝到程序集所在的目录，这里需要注意的是，我们需要分析Code Coverage的程序集有可能并不是都在一个目录，这时，需要我们将PDB文件拷贝到多个地方。</li>
 <li>编写脚本</li>
+</ol>
+<blockquote>
+<ul>
+<li><p>Instrumt </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Vsinstr -coverage &lt;myprojectbinary  the dll/exe&gt;</div><div class="line">...</div><div class="line">Vsinstr -coverage &lt;myprojectbinary the dll/exe&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>开始脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">VSPerfCmd.exe /start:coverage /output:&quot;*.Coverage&quot;</div><div class="line">或</div><div class="line">Start vsperfmon -coverage -output:mytestrun.coverage</div></pre></td></tr></table></figure>
+</li>
+<li><p>结束脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vsperfcmd –shutdown</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ol>
 <li>运行开始脚本，这一步做的是Instrumt,并且开始监控</li>
 <li>运行测试用例</li>
 <li>运行结束脚本，这一步的作用是结束监听，并且生成报告</li>
@@ -394,8 +414,11 @@
 <li>得到的*.coverage文件是与Instrumented的程序集以及PDB文件相关联的，如果需要保存和转移，微软官网给我们的建议是通过VS转换成XML格式。</li>
 <li>Instrument过程中需要程序集的名字作为参数，这意味着，如果我们项目工程增多了，需要对新增加的程序集进行分析，就需要修改脚本。</li>
 <li>第四点值得开发人员注意，微软根据Block的概念计算Code Coverage，而Block的概念是与Instrumented 程序集中的CIL对应的，并不是我们实际的Code，所以我们如果我们从Code文本出发来理解VS中Code Coverage百分比时，往往会比较迷惑。实际上，我们也没有必要这样去做。</li>
-<li>Last but not least, <a href="https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90" target="_blank" rel="external">最权威的资料</a>.aspx)</li>
+<li>Last but not least, 最权威的资料: [<a href="https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx</a>]</li>
 </ol>
+<blockquote>
+<p>本文作者–Barret Xiong–<br>转载请注明出处！</p>
+</blockquote>
 
       
     </div>
@@ -422,22 +445,6 @@
       
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/22/2017-10-22/" rel="prev" title="2017-10-22">
-                2017-10-22 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
 
       
@@ -518,7 +525,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -529,7 +536,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -540,7 +547,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
