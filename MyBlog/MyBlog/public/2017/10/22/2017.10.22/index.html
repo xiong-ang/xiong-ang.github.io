@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Code Coverage, CI," />
+  <meta name="keywords" content="Code Coverage,CI," />
 
 
 
@@ -95,19 +95,19 @@
 
 
 <meta name="description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="keywords" content="Code Coverage, CI">
+<meta name="keywords" content="Code Coverage,CI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
 <meta property="og:url" content="http://yoursite.com/2017/10/22/2017.10.22/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
 <meta property="og:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/public/images/codecoverage.PNG?raw=true">
-<meta property="og:updated_time" content="2017-10-22T11:22:33.299Z">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
+<meta property="og:updated_time" content="2017-10-23T12:26:48.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
 <meta name="twitter:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/public/images/codecoverage.PNG?raw=true">
+<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
 
 
 
@@ -379,7 +379,7 @@
 <p>由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。</p>
 </blockquote>
 <p><strong>Code Coverage</strong>，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。</p>
-<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/public/images/codecoverage.PNG?raw=true" alt=""></p>
+<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true" alt=""></p>
 <ol>
 <li>Instrument，可以理解为配备或准备的意思，这一步使用的工具Vsinstr.exe，它需要将被测程序集名称作为参数，主要作用是将需要测量的程序集分块，并插入监听程序，在这个工程中，需要程序集对应的PDB文件。</li>
 <li>开启监听，并收集覆盖率。这一步用到的工具是Vsperfcmd.exe，它会开启一个监听程序Vsperfmon.exe,当Instrumented的程序集被覆盖到时，会Vsperfmon.exe会收到通知。</li>
@@ -436,7 +436,9 @@
       
         <div class="post-tags">
           
-            <a href="/source/tags/Code-Coverage-CI/" rel="tag"># Code Coverage, CI</a>
+            <a href="/source/tags/Code-Coverage/" rel="tag"># Code Coverage</a>
+          
+            <a href="/source/tags/CI/" rel="tag"># CI</a>
           
         </div>
       
@@ -547,7 +549,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
