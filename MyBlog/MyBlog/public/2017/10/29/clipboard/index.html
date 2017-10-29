@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Clipboard,C#," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Clipboard引荐 Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋">
+<meta name="keywords" content="Clipboard,C#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# Clipboard使用（How to Use Clipboard in C#）">
+<meta property="og:url" content="http://yoursite.com/2017/10/29/clipboard/index.html">
+<meta property="og:site_name" content="Barret&#39;s Notes!">
+<meta property="og:description" content="Clipboard引荐 Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/ClipBoard.PNG?raw=true">
+<meta property="og:updated_time" content="2017-10-29T13:44:26.440Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# Clipboard使用（How to Use Clipboard in C#）">
+<meta name="twitter:description" content="Clipboard引荐 Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋">
+<meta name="twitter:image" content="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/ClipBoard.PNG?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/29/clipboard/"/>
+
+
+
+
+
+  <title>C# Clipboard使用（How to Use Clipboard in C#） | Barret's Notes!</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Barret's Notes!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个勤奋程序员的总结。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/29/clipboard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Barret Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Barret's Notes!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C# Clipboard使用（How to Use Clipboard in C#）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T21:41:31+08:00">
+                2017-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/source/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/29/clipboard/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/29/clipboard/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Clipboard引荐"><a href="#Clipboard引荐" class="headerlink" title="Clipboard引荐"></a><strong>Clipboard引荐</strong></h1><blockquote>
+<p>Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋V键或者点击菜单“粘贴”，这时文本就会显示在文本编辑器中。当然选定的对象还有许多种，这就不一一举例了。上面这些操作其实就是剪切板几种典型的操作。那么这些操作如果用Visual C＃来实现到底是个什么样子？<br>微软引入<strong>Clipboard类</strong>进行处理，我们先来介绍<a href="https://msdn.microsoft.com/zh-cn/library/system.windows.forms.clipboard.aspx" target="_blank" rel="external">MSDN</a>上的一个例子进入今天的讨论。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">下述代码放置文本数据进入Clipboard，并从中在提取出来。</div><div class="line">Winfrm代码界面元素包括：button1, button2, textBox1, textBox2</div><div class="line">*/</div><div class="line"></div><div class="line">private void button1_Click(object sender, System.EventArgs e) &#123;</div><div class="line">    //button1_Click 调用SetDataObject将textBox1中选中的文字放入系统剪切板</div><div class="line"></div><div class="line">    if(textBox1.SelectedText != &quot;&quot;)</div><div class="line">       Clipboard.SetDataObject(textBox1.SelectedText);</div><div class="line">    else</div><div class="line">       textBox2.Text = &quot;No text selected in textBox1&quot;;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> private void button2_Click(object sender, System.EventArgs e) &#123;</div><div class="line">    //button2_Click 调用GetDataObject从系统剪切板提取数据</div><div class="line"></div><div class="line">    IDataObject iData = Clipboard.GetDataObject();</div><div class="line"></div><div class="line">    //判断是否有Text数据格式</div><div class="line">    if(iData.GetDataPresent(DataFormats.Text)) &#123;</div><div class="line">       textBox2.Text = (String)iData.GetData(DataFormats.Text); </div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">       textBox2.Text = &quot;Could not retrieve data off the clipboard.&quot;;</div><div class="line">    &#125;</div><div class="line"> &#125;</div><div class="line">``` </div><div class="line">从这个例子可以学到Clipboard的最基本用法：用SetDataObjec将数据存入系统剪切板；用GetDataObject从系统剪切板获取数据。  </div><div class="line"></div><div class="line"></div><div class="line"># **使用Clipboard保存/获取各种媒体**</div><div class="line">以实际操作的经验，剪切板不仅可以拷贝文字，还可以拷贝图片、文件，当然，通过程序，还可以让Clipboard保存音频和自定义类型。下面针对这些功能分别加以介绍。  </div><div class="line">* **Clipboard保存多媒体**</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>class ClipboardDataFormat<br>{<br>    public static readonly string TEXT=”Text”;<br>    public static readonly string IMAGE=”Image”;<br>    public static readonly string FILEDROP=”FileDrop”;<br>    public static readonly string AUDIO=”Audio”;<br>    public static readonly string USERDEFINED=”UserDefined”;<br>}</p>
+<p>class ClipboardProcesser<br>{<br>    public static void SetDataToClipboard(object o, string type)<br>    {<br>        try<br>        {<br>            if (o != null)<br>            {<br>                if (type == ClipboardDataFormat.TEXT)<br>                {<br>                    Clipboard.SetText((string)o);<br>                }<br>                if (type == ClipboardDataFormat.FILEDROP)<br>                {<br>                    Clipboard.SetFileDropList((System.Collections.Specialized.StringCollection)o);<br>                }<br>                if (type == ClipboardDataFormat.IMAGE)<br>                {<br>                    Clipboard.SetImage((System.Drawing.Image)o);<br>                }<br>                if (type == ClipboardDataFormat.AUDIO)<br>                {<br>                    Clipboard.SetAudio((Stream)o);<br>                }<br>                if (type == ClipboardDataFormat.USERDEFINED)<br>                {<br>                    MyItem item = (MyItem)o;<br>                    item.ToClipboard();<br>                }<br>            }<br>        }<br>        catch (Exception)<br>        {<br>        }<br>    }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">//自定义要往剪切板添加的类型</div><div class="line">[Serializable]</div><div class="line">public class MyItem</div><div class="line">&#123;</div><div class="line">    public string ItemName &#123; get; set; &#125;</div><div class="line">    public object ItemData &#123; get; set; &#125;</div><div class="line">    </div><div class="line">    public void ToClipboard()</div><div class="line">    &#123;</div><div class="line">        DataFormats.Format format = DataFormats.GetFormat(ClipboardDataFormat.USERDEFINED);</div><div class="line"></div><div class="line">        IDataObject dataObj = new DataObject();</div><div class="line">        dataObj.SetData(format.Name, false, this);</div><div class="line">        Clipboard.SetDataObject(dataObj, false);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>Clipboard获取多媒体</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">public static object GetDataFromClipboardByType(string type)</div><div class="line">    &#123;</div><div class="line">        object retObj = null;</div><div class="line">        try</div><div class="line">        &#123;</div><div class="line">            if (type == ClipboardDataFormat.TEXT)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetText();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.FILEDROP)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetFileDropList();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.IMAGE)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetImage();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.AUDIO)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetAudioStream();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.USERDEFINED)</div><div class="line">            &#123;</div><div class="line">                IDataObject iData = Clipboard.GetDataObject();</div><div class="line">                retObj = (MyItem)iData.GetData(type);</div><div class="line">            &#125;                </div><div class="line">        &#125;</div><div class="line">        catch (Exception)</div><div class="line">        &#123;</div><div class="line">            retObj = null;</div><div class="line">        &#125;</div><div class="line">        return retObj;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static string GetDataTypeFromClipboard()</div><div class="line">    &#123;</div><div class="line">        string type = string.Empty;</div><div class="line"></div><div class="line">        try</div><div class="line">        &#123;</div><div class="line">            if (Clipboard.ContainsText())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.TEXT;</div><div class="line">            &#125;</div><div class="line">            else if (Clipboard.ContainsFileDropList())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.FILEDROP;</div><div class="line">            &#125;</div><div class="line">            else if (Clipboard.ContainsImage())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.IMAGE;</div><div class="line">            &#125;</div><div class="line">            else if (Clipboard.ContainsAudio())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.AUDIO;</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                IDataObject iData = Clipboard.GetDataObject();</div><div class="line">                if (iData.GetDataPresent(ClipboardDataFormat.USERDEFINED))</div><div class="line">                &#123;</div><div class="line">                    type = ClipboardDataFormat.USERDEFINED;</div><div class="line">                &#125; </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        catch (Exception)</div><div class="line">        &#123;</div><div class="line">        &#125;</div><div class="line">        return type;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="让窗体自动响应Clipboard的变化"><a href="#让窗体自动响应Clipboard的变化" class="headerlink" title="让窗体自动响应Clipboard的变化"></a><strong>让窗体自动响应Clipboard的变化</strong></h1><p>让窗体自动响应Clipboard的变化这是一个非常酷的功能，实现这个需求并不难，大致分四步：</p>
+<ul>
+<li><p><strong>Form类中引入三个函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// SetClipboardViewer 用于往观察链中添加一个窗口句柄，这个窗口就可成为观察链中的一员了，返回值指向下一个观察者</div><div class="line">[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]</div><div class="line">private static extern IntPtr SetClipboardViewer(IntPtr hwnd);</div><div class="line"></div><div class="line">//ChangeClipboardChain删除由hwnd指定的观察链成员，这是一个窗口句柄，第二个参数hWndNext是观察链中下一个窗口的句柄</div><div class="line">[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]</div><div class="line">private static extern IntPtr ChangeClipboardChain(IntPtr hwnd,IntPtr hWndNext);</div><div class="line"></div><div class="line">//SendMessage 发送消息</div><div class="line">[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]</div><div class="line">private static extern int SendMessage(IntPtr hwnd,int wMsg,IntPtr wParam,IntPtr lParam);</div><div class="line"></div><div class="line">//Clipboard内容变化消息</div><div class="line">const int WM_DRAWCLIPBOARD = 0x308;</div><div class="line">//Clipboard观察链变化消息</div><div class="line">const int WM_CHANGECBCHAIN = 0x30D;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Form_Load中把窗口添加到观察链中成为观察者，并保存下一个观察者的句柄</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//存放观察链中下一个窗口句柄   </div><div class="line">IntPtr NextClipHwnd;</div><div class="line">private void Form_Load(object sender, System.EventArgs e)</div><div class="line">&#123;  </div><div class="line">     //获得观察链中下一个窗口句柄</div><div class="line">    NextClipHwnd=SetClipboardViewer(this.Handle);           </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重载WndProc方法，监视剪切板，并处理，并把剪切板变化的消息发送给下一个观察者</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">protected override void WndProc(ref System.Windows.Forms.Message m)</div><div class="line">&#123;</div><div class="line">    switch(m.Msg)</div><div class="line">    &#123;</div><div class="line">        case WM_DRAWCLIPBOARD:</div><div class="line">            //将WM_DRAWCLIPBOARD消息传递到下一个观察链中的窗口</div><div class="line">            SendMessage(NextClipHwnd,m.Msg,m.WParam,m.LParam);</div><div class="line"></div><div class="line">            //获取Clipboard内容，并处理</div><div class="line">            IDataObject iData = Clipboard.GetDataObject();</div><div class="line">            ...</div><div class="line">            ...</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            base.WndProc(ref m);</div><div class="line">            break;</div><div class="line">    &#125;       </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Form_Closed中撤消自己定义的观察者，并通知下一个观察者</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">private void Form_Closed(object sender, System.EventArgs e)</div><div class="line">&#123;</div><div class="line">    //从观察链中删除本观察窗口</div><div class="line">    ChangeClipboardChain(this.Handle,NextClipHwnd);</div><div class="line">    //将变动消息WM_CHANGECBCHAIN消息传递到下一个观察链中的窗口</div><div class="line">    SendMessage(NextClipHwnd,WM_CHANGECBCHAIN,this.Handle,NextClipHwnd);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="解决Clipboard冲突"><a href="#解决Clipboard冲突" class="headerlink" title="解决Clipboard冲突"></a><strong>解决Clipboard冲突</strong></h1><ul>
+<li>待补充  </li>
+</ul>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="[Demo]"></a><strong>[<a href="https://github.com/xiong-ang/CShape_SLN" target="_blank" rel="external">Demo</a>]</strong></h1><ul>
+<li><strong>界面</strong><br><img src="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/ClipBoard.PNG?raw=true" alt="Alt text"></li>
+<li><strong>功能</strong><br>自动捕捉剪切板变化，并显示其中的文字、图片、文件以及自定义类型。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/Clipboard/" rel="tag"># Clipboard</a>
+          
+            <a href="/source/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/22/2017.10.22/" rel="next" title="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
+                <i class="fa fa-chevron-left"></i> 如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/29/dragdrop/" rel="prev" title="C#中实现控件拖拽效果（How to DragDrop Control in C#）">
+                C#中实现控件拖拽效果（How to DragDrop Control in C#） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/timg.jpg"
+               alt="Barret Xiong" />
+          <p class="site-author-name" itemprop="name">Barret Xiong</p>
+           
+              <p class="site-description motion-element" itemprop="description">Be Excellent, Never Give in!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiong-ang/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:xiong.ang@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Clipboard引荐"><span class="nav-number">1.</span> <span class="nav-text">Clipboard引荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让窗体自动响应Clipboard的变化"><span class="nav-number">2.</span> <span class="nav-text">让窗体自动响应Clipboard的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决Clipboard冲突"><span class="nav-number">3.</span> <span class="nav-text">解决Clipboard冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">[Demo]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Barret Xiong</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://评论.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/10/29/clipboard/';
+          this.page.identifier = '2017/10/29/clipboard/';
+          this.page.title = 'C# Clipboard使用（How to Use Clipboard in C#）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://评论.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

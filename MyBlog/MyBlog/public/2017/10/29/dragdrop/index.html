@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Code Coverage,CI," />
+  <meta name="keywords" content="C#,DragDrop," />
 
 
 
@@ -94,20 +94,20 @@
 
 
 
-<meta name="description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="keywords" content="Code Coverage,CI">
+<meta name="description" content="当产品间需要交互实现数据传递，或产品需要从外部导入文件时，通过控件拖拽来实现是个不错的选择。在UI上支持控件拖拽，可极大提升用户体验。拖拽本身并不神秘，它的本质实际是一个数据交换的过程。控件接受从其他地方来的数据，并进行处理。数据交换有多种方法，Windows中剪贴板可能就是用的最多，但最不被注意的一种方法。下面介绍用C#实现控件拖拽，并通过剪切板交换数据。    控件拖拽触发/响应函数对于拖拽">
+<meta name="keywords" content="C#,DragDrop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta property="og:url" content="http://yoursite.com/2017/10/22/2017.10.22/index.html">
+<meta property="og:title" content="C#中实现控件拖拽效果（How to DragDrop Control in C#）">
+<meta property="og:url" content="http://yoursite.com/2017/10/29/dragdrop/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
+<meta property="og:description" content="当产品间需要交互实现数据传递，或产品需要从外部导入文件时，通过控件拖拽来实现是个不错的选择。在UI上支持控件拖拽，可极大提升用户体验。拖拽本身并不神秘，它的本质实际是一个数据交换的过程。控件接受从其他地方来的数据，并进行处理。数据交换有多种方法，Windows中剪贴板可能就是用的最多，但最不被注意的一种方法。下面介绍用C#实现控件拖拽，并通过剪切板交换数据。    控件拖拽触发/响应函数对于拖拽">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
-<meta property="og:updated_time" content="2017-10-23T12:26:48.124Z">
+<meta property="og:image" content="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/DragDrop.PNG?raw=true">
+<meta property="og:updated_time" content="2017-10-29T13:51:24.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta name="twitter:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
+<meta name="twitter:title" content="C#中实现控件拖拽效果（How to DragDrop Control in C#）">
+<meta name="twitter:description" content="当产品间需要交互实现数据传递，或产品需要从外部导入文件时，通过控件拖拽来实现是个不错的选择。在UI上支持控件拖拽，可极大提升用户体验。拖拽本身并不神秘，它的本质实际是一个数据交换的过程。控件接受从其他地方来的数据，并进行处理。数据交换有多种方法，Windows中剪贴板可能就是用的最多，但最不被注意的一种方法。下面介绍用C#实现控件拖拽，并通过剪切板交换数据。    控件拖拽触发/响应函数对于拖拽">
+<meta name="twitter:image" content="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/DragDrop.PNG?raw=true">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/22/2017.10.22/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/29/dragdrop/"/>
 
 
 
 
 
-  <title>如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool) | Barret's Notes!</title>
+  <title>C#中实现控件拖拽效果（How to DragDrop Control in C#） | Barret's Notes!</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/2017.10.22/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/29/dragdrop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Barret Xiong">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)</h1>
+          <h1 class="post-title" itemprop="name headline">C#中实现控件拖拽效果（How to DragDrop Control in C#）</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T13:36:10+08:00">
-                2017-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T21:41:48+08:00">
+                2017-10-29
               </time>
             
 
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/source/categories/CI/" itemprop="url" rel="index">
-                    <span itemprop="name">CI</span>
+                  <a href="/source/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
                   </a>
                 </span>
 
@@ -345,9 +345,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/22/2017.10.22/#comments" itemprop="discussionUrl">
+                <a href="/2017/10/29/dragdrop/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/22/2017.10.22/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/10/29/dragdrop/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -376,49 +376,65 @@
 
       
         <blockquote>
-<p>由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。</p>
+<p>当产品间需要交互实现数据传递，或产品需要从外部导入文件时，通过控件拖拽来实现是个不错的选择。在UI上支持控件拖拽，可极大提升用户体验。<br>拖拽本身并不神秘，它的本质实际是一个数据交换的过程。控件接受从其他地方来的数据，并进行处理。数据交换有多种方法，Windows中剪贴板可能就是用的最多，但最不被注意的一种方法。<br>下面介绍用C#实现控件拖拽，并通过剪切板交换数据。  </p>
 </blockquote>
-<p><strong>Code Coverage</strong>，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。</p>
-<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true" alt=""></p>
-<ol>
-<li>Instrument，可以理解为配备或准备的意思，这一步使用的工具Vsinstr.exe，它需要将被测程序集名称作为参数，主要作用是将需要测量的程序集分块，并插入监听程序，在这个工程中，需要程序集对应的PDB文件。</li>
-<li>开启监听，并收集覆盖率。这一步用到的工具是Vsperfcmd.exe，它会开启一个监听程序Vsperfmon.exe,当Instrumented的程序集被覆盖到时，会Vsperfmon.exe会收到通知。</li>
-<li>运行测试用例。</li>
-<li>使用Vsperfcmd，输入与上面不同的参数，停止监听，生成Code Coverage报告。</li>
-</ol>
-<h2 id="遵循这四步的Workflow"><a href="#遵循这四步的Workflow" class="headerlink" title="遵循这四步的Workflow"></a>遵循这四步的Workflow</h2><ol>
-<li>首先安装需要分析Code Coverage的产品</li>
-<li>将PDB拷贝到程序集所在的目录，这里需要注意的是，我们需要分析Code Coverage的程序集有可能并不是都在一个目录，这时，需要我们将PDB文件拷贝到多个地方。</li>
-<li>编写脚本</li>
-</ol>
-<blockquote>
+<h1 id="控件拖拽触发-响应函数"><a href="#控件拖拽触发-响应函数" class="headerlink" title="控件拖拽触发/响应函数"></a><strong>控件拖拽触发/响应函数</strong></h1><p>对于拖拽的对象，需要在<strong>MouseDown</strong>或<strong>ItemDrag</strong>中调用<strong>DoDragDrop</strong>，传递要拖拽的数据对象并触发拖拽。总的来说，当用户调用DoDragDrop方法后，就进入到一个循环中。 循环会一直跟踪鼠标，检查鼠标所在的窗体是否实现IDropTarget，如果实现了则：调用<strong>DropEnter</strong>，并通过调用GiveFeedBack来显示效果；鼠标在控件上时，调用<strong>DropOver</strong>，也是通过GiveFeedBack来显示效果；在拖拽过程中，键盘或鼠标按键发生变化，可以通过QueryContinueDrag来检查是否能继续操作，根据不同的返回结果，调用<strong>DropOver</strong>或<strong>DropLeave</strong>；鼠标释放时触发<strong>DragDrop</strong>事件，执行拖拽逻辑。</p>
 <ul>
-<li><p>Instrumt </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Vsinstr -coverage &lt;myprojectbinary  the dll/exe&gt;</div><div class="line">...</div><div class="line">Vsinstr -coverage &lt;myprojectbinary the dll/exe&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>开始脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">VSPerfCmd.exe /start:coverage /output:&quot;*.Coverage&quot;</div><div class="line">或</div><div class="line">Start vsperfmon -coverage -output:mytestrun.coverage</div></pre></td></tr></table></figure>
-</li>
-<li><p>结束脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vsperfcmd –shutdown</div></pre></td></tr></table></figure>
-</li>
+<li><strong>DragEnter、DragOver、DragLeave事件</strong><br><strong>触发：</strong> 当用鼠标拖拽一个对象到控件的窗口时，首先触发DragEnter，然后是DragOver，拖放对象悬浮于拖放区域，在拖放区域内移动时多次触发DragOver，当离开窗体时触发DragLeave。<br><strong>作用：</strong> 设置判断对象是否是要接受的类型以及鼠标的样式。</li>
+<li><strong>DragDrop事件</strong><br><strong>触发：</strong> 当用户拖拽对象到控件上，并释放时触发。<br><strong>作用：</strong> 接受拖拽数据，实现拖拽逻辑  </li>
 </ul>
-</blockquote>
-<ol>
-<li>运行开始脚本，这一步做的是Instrumt,并且开始监控</li>
-<li>运行测试用例</li>
-<li>运行结束脚本，这一步的作用是结束监听，并且生成报告</li>
+<h1 id="实现控件拖拽的典型流程"><a href="#实现控件拖拽的典型流程" class="headerlink" title="实现控件拖拽的典型流程"></a><strong>实现控件拖拽的典型流程</strong></h1><ol>
+<li><strong>设置AllowDrop</strong><br>在对一个控件进行拖拽编程时，我们必须把AllowDrop属性设置为True</li>
+<li><p><strong>拖动对象触发DragDrop</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">private void listBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)</div><div class="line">&#123;</div><div class="line">	this.listBox1.DoDragDrop(&quot;Drag Data&quot;, DragDropEffects.Move);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>拖到目标响应DragDrop</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private void listBox2_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)</div><div class="line">&#123;</div><div class="line">	if (e.Data.GetDataPresent(DataFormats.Text))</div><div class="line">	&#123;</div><div class="line">		//设置DragDrop效果</div><div class="line">		e.Effect = DragDropEffects.Move;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void listBox2_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)</div><div class="line">&#123;</div><div class="line">	//执行DragDrop逻辑</div><div class="line">	this.listBox2.Items.Add(e.Data.GetData(DataFormats.Text));</div><div class="line">	this.listBox1.Items.Remove(e.Data.GetData(DataFormats.Text));</div><div class="line">&#125;</div><div class="line">```  </div><div class="line"></div><div class="line"># **控件拖拽的参数**</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<h2 id="最后值得注意的事项"><a href="#最后值得注意的事项" class="headerlink" title="最后值得注意的事项"></a>最后值得注意的事项</h2><ol>
-<li>在分析Code Coverage的过程中，后台会启动一个VSPerfMon.exed的进程，用于收集Code Coverage信息，只要这个进程结束，收集会终止，所以在这个过程中，关机或者手动关闭这个进程，都会影响分析结果的准确性。</li>
-<li>得到的*.coverage文件是与Instrumented的程序集以及PDB文件相关联的，如果需要保存和转移，微软官网给我们的建议是通过VS转换成XML格式。</li>
-<li>Instrument过程中需要程序集的名字作为参数，这意味着，如果我们项目工程增多了，需要对新增加的程序集进行分析，就需要修改脚本。</li>
-<li>第四点值得开发人员注意，微软根据Block的概念计算Code Coverage，而Block的概念是与Instrumented 程序集中的CIL对应的，并不是我们实际的Code，所以我们如果我们从Code文本出发来理解VS中Code Coverage百分比时，往往会比较迷惑。实际上，我们也没有必要这样去做。</li>
-<li>Last but not least, 最权威的资料: [<a href="https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx</a>]</li>
-</ol>
-<blockquote>
-<p>本文作者–Barret Xiong–<br>转载请注明出处！</p>
-</blockquote>
+<p>public DragDropEffects DoDragDrop ( Object data,DragDropEffects allowedEffects)<br>```</p>
+<ul>
+<li>data：户所要拖动的数据内容。必须将所要拖动的内容传入到这个方法的第一个参数位置。并不是必须得，比如在不同应用间传递数据时，可以借由<a href="https://xiong-ang.github.io/2017/10/29/clipboard/" target="_blank" rel="external">剪切板</a>。  <h1 id="控件拖拽的特效"><a href="#控件拖拽的特效" class="headerlink" title="控件拖拽的特效"></a><strong>控件拖拽的特效</strong></h1>控件拖拽的特效由DragDropEffects枚举来指定。</li>
+<li><strong>DragDropEffects说明</strong>  </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>成员名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td style="text-align:left">Copy、Move 和 Scroll 效果的组合  </td>
+</tr>
+<tr>
+<td>Copy</td>
+<td style="text-align:left">将拖动源中的数据复制到放置目标，图标为一个框右上角带+</td>
+</tr>
+<tr>
+<td>Link</td>
+<td style="text-align:left">将拖动源中的数据链接到放置目标，图标为数据快捷图标</td>
+</tr>
+<tr>
+<td>Move</td>
+<td style="text-align:left">将拖动源的数据移动到放置目标，图标为一个框</td>
+</tr>
+<tr>
+<td>None</td>
+<td style="text-align:left">放置目标不接受该数据，图标为禁止标识</td>
+</tr>
+<tr>
+<td>Scroll</td>
+<td style="text-align:left">拖动时，如果有滚动条目，可以滚动目标，以定位在目标中当前不可见的某个放置位置  </td>
+</tr>
+</tbody>
+</table>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="[Demo]"></a><strong>[<a href="https://github.com/xiong-ang/CShape_SLN" target="_blank" rel="external">Demo</a>]</strong></h1><ul>
+<li><strong>界面</strong><br><img src="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/DragDrop.PNG?raw=true" alt=""></li>
+<li><strong>功能</strong><br>实现文件的拖拽以及应用程序之间的拖拽。</li>
+</ul>
 
       
     </div>
@@ -436,9 +452,9 @@
       
         <div class="post-tags">
           
-            <a href="/source/tags/Code-Coverage/" rel="tag"># Code Coverage</a>
+            <a href="/source/tags/C/" rel="tag"># C#</a>
           
-            <a href="/source/tags/CI/" rel="tag"># CI</a>
+            <a href="/source/tags/DragDrop/" rel="tag"># DragDrop</a>
           
         </div>
       
@@ -451,15 +467,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/29/clipboard/" rel="next" title="C# Clipboard使用（How to Use Clipboard in C#）">
+                <i class="fa fa-chevron-left"></i> C# Clipboard使用（How to Use Clipboard in C#）
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/29/clipboard/" rel="prev" title="C# Clipboard使用（How to Use Clipboard in C#）">
-                C# Clipboard使用（How to Use Clipboard in C#） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用微软命令行工具分析Code-Coverage"><span class="nav-number">1.</span> <span class="nav-text">使用微软命令行工具分析Code Coverage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遵循这四步的Workflow"><span class="nav-number">2.</span> <span class="nav-text">遵循这四步的Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后值得注意的事项"><span class="nav-number">3.</span> <span class="nav-text">最后值得注意的事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#控件拖拽触发-响应函数"><span class="nav-number">1.</span> <span class="nav-text">控件拖拽触发/响应函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现控件拖拽的典型流程"><span class="nav-number">2.</span> <span class="nav-text">实现控件拖拽的典型流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控件拖拽的特效"><span class="nav-number">3.</span> <span class="nav-text">控件拖拽的特效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">[Demo]</span></a></li></ol></div>
             
 
           </div>
@@ -752,9 +768,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/22/2017.10.22/';
-          this.page.identifier = '2017/10/22/2017.10.22/';
-          this.page.title = '如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)';
+          this.page.url = 'http://yoursite.com/2017/10/29/dragdrop/';
+          this.page.identifier = '2017/10/29/dragdrop/';
+          this.page.title = 'C#中实现控件拖拽效果（How to DragDrop Control in C#）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://评论.disqus.com/embed.js';
