@@ -103,7 +103,7 @@
 <meta property="og:description" content="Clipboard引荐 Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/ClipBoard.PNG?raw=true">
-<meta property="og:updated_time" content="2017-10-29T13:44:26.440Z">
+<meta property="og:updated_time" content="2017-11-05T04:25:39.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C# Clipboard使用（How to Use Clipboard in C#）">
 <meta name="twitter:description" content="Clipboard引荐 Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋">
@@ -376,35 +376,243 @@
 
       
         <h1 id="Clipboard引荐"><a href="#Clipboard引荐" class="headerlink" title="Clipboard引荐"></a><strong>Clipboard引荐</strong></h1><blockquote>
-<p>Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋V键或者点击菜单“粘贴”，这时文本就会显示在文本编辑器中。当然选定的对象还有许多种，这就不一一举例了。上面这些操作其实就是剪切板几种典型的操作。那么这些操作如果用Visual C＃来实现到底是个什么样子？<br>微软引入<strong>Clipboard类</strong>进行处理，我们先来介绍<a href="https://msdn.microsoft.com/zh-cn/library/system.windows.forms.clipboard.aspx" target="_blank" rel="external">MSDN</a>上的一个例子进入今天的讨论。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">下述代码放置文本数据进入Clipboard，并从中在提取出来。</div><div class="line">Winfrm代码界面元素包括：button1, button2, textBox1, textBox2</div><div class="line">*/</div><div class="line"></div><div class="line">private void button1_Click(object sender, System.EventArgs e) &#123;</div><div class="line">    //button1_Click 调用SetDataObject将textBox1中选中的文字放入系统剪切板</div><div class="line"></div><div class="line">    if(textBox1.SelectedText != &quot;&quot;)</div><div class="line">       Clipboard.SetDataObject(textBox1.SelectedText);</div><div class="line">    else</div><div class="line">       textBox2.Text = &quot;No text selected in textBox1&quot;;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> private void button2_Click(object sender, System.EventArgs e) &#123;</div><div class="line">    //button2_Click 调用GetDataObject从系统剪切板提取数据</div><div class="line"></div><div class="line">    IDataObject iData = Clipboard.GetDataObject();</div><div class="line"></div><div class="line">    //判断是否有Text数据格式</div><div class="line">    if(iData.GetDataPresent(DataFormats.Text)) &#123;</div><div class="line">       textBox2.Text = (String)iData.GetData(DataFormats.Text); </div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">       textBox2.Text = &quot;Could not retrieve data off the clipboard.&quot;;</div><div class="line">    &#125;</div><div class="line"> &#125;</div><div class="line">``` </div><div class="line">从这个例子可以学到Clipboard的最基本用法：用SetDataObjec将数据存入系统剪切板；用GetDataObject从系统剪切板获取数据。  </div><div class="line"></div><div class="line"></div><div class="line"># **使用Clipboard保存/获取各种媒体**</div><div class="line">以实际操作的经验，剪切板不仅可以拷贝文字，还可以拷贝图片、文件，当然，通过程序，还可以让Clipboard保存音频和自定义类型。下面针对这些功能分别加以介绍。  </div><div class="line">* **Clipboard保存多媒体**</div></pre></td></tr></table></figure></p>
+<p>Clipboard，即剪切板，当我们同时按动Ctrl＋C时，选定的对象就被存放在了剪切板中了。如果刚才选定的对象是文件，那么在定盘符后，按动Ctrl＋V键或者点击菜单“粘贴”，这时选定的文件就保存到指定的磁盘上面了；如果选定的对象是图象，那么在打开“画图”之后，按动Ctrl＋V键或者点击菜单“粘贴”，图象就会显示在画图中了；如果是文本，那么在打开文本编辑器后，按动Ctrl＋V键或者点击菜单“粘贴”，这时文本就会显示在文本编辑器中。当然选定的对象还有许多种，这就不一一举例了。上面这些操作其实就是剪切板几种典型的操作。那么这些操作如果用Visual C＃来实现到底是个什么样子？<br>微软引入<strong>Clipboard类</strong>进行处理，我们先来介绍<a href="https://msdn.microsoft.com/zh-cn/library/system.windows.forms.clipboard.aspx" target="_blank" rel="external">MSDN</a>上的一个例子进入今天的讨论。   </p>
 </blockquote>
-<p>class ClipboardDataFormat<br>{<br>    public static readonly string TEXT=”Text”;<br>    public static readonly string IMAGE=”Image”;<br>    public static readonly string FILEDROP=”FileDrop”;<br>    public static readonly string AUDIO=”Audio”;<br>    public static readonly string USERDEFINED=”UserDefined”;<br>}</p>
-<p>class ClipboardProcesser<br>{<br>    public static void SetDataToClipboard(object o, string type)<br>    {<br>        try<br>        {<br>            if (o != null)<br>            {<br>                if (type == ClipboardDataFormat.TEXT)<br>                {<br>                    Clipboard.SetText((string)o);<br>                }<br>                if (type == ClipboardDataFormat.FILEDROP)<br>                {<br>                    Clipboard.SetFileDropList((System.Collections.Specialized.StringCollection)o);<br>                }<br>                if (type == ClipboardDataFormat.IMAGE)<br>                {<br>                    Clipboard.SetImage((System.Drawing.Image)o);<br>                }<br>                if (type == ClipboardDataFormat.AUDIO)<br>                {<br>                    Clipboard.SetAudio((Stream)o);<br>                }<br>                if (type == ClipboardDataFormat.USERDEFINED)<br>                {<br>                    MyItem item = (MyItem)o;<br>                    item.ToClipboard();<br>                }<br>            }<br>        }<br>        catch (Exception)<br>        {<br>        }<br>    }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">//自定义要往剪切板添加的类型</div><div class="line">[Serializable]</div><div class="line">public class MyItem</div><div class="line">&#123;</div><div class="line">    public string ItemName &#123; get; set; &#125;</div><div class="line">    public object ItemData &#123; get; set; &#125;</div><div class="line">    </div><div class="line">    public void ToClipboard()</div><div class="line">    &#123;</div><div class="line">        DataFormats.Format format = DataFormats.GetFormat(ClipboardDataFormat.USERDEFINED);</div><div class="line"></div><div class="line">        IDataObject dataObj = new DataObject();</div><div class="line">        dataObj.SetData(format.Name, false, this);</div><div class="line">        Clipboard.SetDataObject(dataObj, false);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<pre><code>/*
+下述代码放置文本数据进入Clipboard，并从中在提取出来。
+Winfrm代码界面元素包括：button1, button2, textBox1, textBox2
+*/
+
+private void button1_Click(object sender, System.EventArgs e) {
+    //button1_Click 调用SetDataObject将textBox1中选中的文字放入系统剪切板
+
+    if(textBox1.SelectedText != &quot;&quot;)
+       Clipboard.SetDataObject(textBox1.SelectedText);
+    else
+       textBox2.Text = &quot;No text selected in textBox1&quot;;
+ }
+
+ private void button2_Click(object sender, System.EventArgs e) {
+    //button2_Click 调用GetDataObject从系统剪切板提取数据
+
+    IDataObject iData = Clipboard.GetDataObject();
+
+    //判断是否有Text数据格式
+    if(iData.GetDataPresent(DataFormats.Text)) {
+       textBox2.Text = (String)iData.GetData(DataFormats.Text); 
+    }
+    else {
+       textBox2.Text = &quot;Could not retrieve data off the clipboard.&quot;;
+    }
+ }
+</code></pre><p>从这个例子可以学到Clipboard的最基本用法：用SetDataObjec将数据存入系统剪切板；用GetDataObject从系统剪切板获取数据。  </p>
+<h1 id="使用Clipboard保存-获取各种媒体"><a href="#使用Clipboard保存-获取各种媒体" class="headerlink" title="使用Clipboard保存/获取各种媒体"></a><strong>使用Clipboard保存/获取各种媒体</strong></h1><p>以实际操作的经验，剪切板不仅可以拷贝文字，还可以拷贝图片、文件，当然，通过程序，还可以让Clipboard保存音频和自定义类型。下面针对这些功能分别加以介绍。  </p>
 <ul>
-<li><strong>Clipboard获取多媒体</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">public static object GetDataFromClipboardByType(string type)</div><div class="line">    &#123;</div><div class="line">        object retObj = null;</div><div class="line">        try</div><div class="line">        &#123;</div><div class="line">            if (type == ClipboardDataFormat.TEXT)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetText();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.FILEDROP)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetFileDropList();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.IMAGE)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetImage();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.AUDIO)</div><div class="line">            &#123;</div><div class="line">                retObj = Clipboard.GetAudioStream();</div><div class="line">            &#125;</div><div class="line">            if (type == ClipboardDataFormat.USERDEFINED)</div><div class="line">            &#123;</div><div class="line">                IDataObject iData = Clipboard.GetDataObject();</div><div class="line">                retObj = (MyItem)iData.GetData(type);</div><div class="line">            &#125;                </div><div class="line">        &#125;</div><div class="line">        catch (Exception)</div><div class="line">        &#123;</div><div class="line">            retObj = null;</div><div class="line">        &#125;</div><div class="line">        return retObj;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static string GetDataTypeFromClipboard()</div><div class="line">    &#123;</div><div class="line">        string type = string.Empty;</div><div class="line"></div><div class="line">        try</div><div class="line">        &#123;</div><div class="line">            if (Clipboard.ContainsText())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.TEXT;</div><div class="line">            &#125;</div><div class="line">            else if (Clipboard.ContainsFileDropList())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.FILEDROP;</div><div class="line">            &#125;</div><div class="line">            else if (Clipboard.ContainsImage())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.IMAGE;</div><div class="line">            &#125;</div><div class="line">            else if (Clipboard.ContainsAudio())</div><div class="line">            &#123;</div><div class="line">                type = ClipboardDataFormat.AUDIO;</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                IDataObject iData = Clipboard.GetDataObject();</div><div class="line">                if (iData.GetDataPresent(ClipboardDataFormat.USERDEFINED))</div><div class="line">                &#123;</div><div class="line">                    type = ClipboardDataFormat.USERDEFINED;</div><div class="line">                &#125; </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        catch (Exception)</div><div class="line">        &#123;</div><div class="line">        &#125;</div><div class="line">        return type;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li><strong>Clipboard保存多媒体</strong>      </li>
 </ul>
-<h1 id="让窗体自动响应Clipboard的变化"><a href="#让窗体自动响应Clipboard的变化" class="headerlink" title="让窗体自动响应Clipboard的变化"></a><strong>让窗体自动响应Clipboard的变化</strong></h1><p>让窗体自动响应Clipboard的变化这是一个非常酷的功能，实现这个需求并不难，大致分四步：</p>
+<pre><code>class ClipboardDataFormat
+{
+    public static readonly string TEXT=&quot;Text&quot;;
+    public static readonly string IMAGE=&quot;Image&quot;;
+    public static readonly string FILEDROP=&quot;FileDrop&quot;;
+    public static readonly string AUDIO=&quot;Audio&quot;;
+    public static readonly string USERDEFINED=&quot;UserDefined&quot;;
+}
+
+class ClipboardProcesser
+{
+    public static void SetDataToClipboard(object o, string type)
+    {
+        try
+        {
+            if (o != null)
+            {
+                if (type == ClipboardDataFormat.TEXT)
+                {
+                    Clipboard.SetText((string)o);
+                }
+                if (type == ClipboardDataFormat.FILEDROP)
+                {
+                    Clipboard.SetFileDropList((System.Collections.Specialized.StringCollection)o);
+                }
+                if (type == ClipboardDataFormat.IMAGE)
+                {
+                    Clipboard.SetImage((System.Drawing.Image)o);
+                }
+                if (type == ClipboardDataFormat.AUDIO)
+                {
+                    Clipboard.SetAudio((Stream)o);
+                }
+                if (type == ClipboardDataFormat.USERDEFINED)
+                {
+                    MyItem item = (MyItem)o;
+                    item.ToClipboard();
+                }
+            }
+        }
+        catch (Exception)
+        {
+        }
+    }
+</code></pre><pre><code>//自定义要往剪切板添加的类型
+[Serializable]
+public class MyItem
+{
+    public string ItemName { get; set; }
+    public object ItemData { get; set; }
+
+    public void ToClipboard()
+    {
+        DataFormats.Format format = DataFormats.GetFormat(ClipboardDataFormat.USERDEFINED);
+
+        IDataObject dataObj = new DataObject();
+        dataObj.SetData(format.Name, false, this);
+        Clipboard.SetDataObject(dataObj, false);
+    }
+}
+</code></pre><ul>
+<li><strong>Clipboard获取多媒体</strong>     </li>
+</ul>
+<pre><code>public static object GetDataFromClipboardByType(string type)
+    {
+        object retObj = null;
+        try
+        {
+            if (type == ClipboardDataFormat.TEXT)
+            {
+                retObj = Clipboard.GetText();
+            }
+            if (type == ClipboardDataFormat.FILEDROP)
+            {
+                retObj = Clipboard.GetFileDropList();
+            }
+            if (type == ClipboardDataFormat.IMAGE)
+            {
+                retObj = Clipboard.GetImage();
+            }
+            if (type == ClipboardDataFormat.AUDIO)
+            {
+                retObj = Clipboard.GetAudioStream();
+            }
+            if (type == ClipboardDataFormat.USERDEFINED)
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                retObj = (MyItem)iData.GetData(type);
+            }                
+        }
+        catch (Exception)
+        {
+            retObj = null;
+        }
+        return retObj;
+    }
+
+    public static string GetDataTypeFromClipboard()
+    {
+        string type = string.Empty;
+
+        try
+        {
+            if (Clipboard.ContainsText())
+            {
+                type = ClipboardDataFormat.TEXT;
+            }
+            else if (Clipboard.ContainsFileDropList())
+            {
+                type = ClipboardDataFormat.FILEDROP;
+            }
+            else if (Clipboard.ContainsImage())
+            {
+                type = ClipboardDataFormat.IMAGE;
+            }
+            else if (Clipboard.ContainsAudio())
+            {
+                type = ClipboardDataFormat.AUDIO;
+            }
+            else
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(ClipboardDataFormat.USERDEFINED))
+                {
+                    type = ClipboardDataFormat.USERDEFINED;
+                } 
+            }
+        }
+        catch (Exception)
+        {
+        }
+        return type;
+    }
+}
+</code></pre><h1 id="让窗体自动响应Clipboard的变化"><a href="#让窗体自动响应Clipboard的变化" class="headerlink" title="让窗体自动响应Clipboard的变化"></a><strong>让窗体自动响应Clipboard的变化</strong></h1><p>让窗体自动响应Clipboard的变化这是一个非常酷的功能，实现这个需求并不难，大致分四步：   </p>
 <ul>
-<li><p><strong>Form类中引入三个函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// SetClipboardViewer 用于往观察链中添加一个窗口句柄，这个窗口就可成为观察链中的一员了，返回值指向下一个观察者</div><div class="line">[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]</div><div class="line">private static extern IntPtr SetClipboardViewer(IntPtr hwnd);</div><div class="line"></div><div class="line">//ChangeClipboardChain删除由hwnd指定的观察链成员，这是一个窗口句柄，第二个参数hWndNext是观察链中下一个窗口的句柄</div><div class="line">[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]</div><div class="line">private static extern IntPtr ChangeClipboardChain(IntPtr hwnd,IntPtr hWndNext);</div><div class="line"></div><div class="line">//SendMessage 发送消息</div><div class="line">[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]</div><div class="line">private static extern int SendMessage(IntPtr hwnd,int wMsg,IntPtr wParam,IntPtr lParam);</div><div class="line"></div><div class="line">//Clipboard内容变化消息</div><div class="line">const int WM_DRAWCLIPBOARD = 0x308;</div><div class="line">//Clipboard观察链变化消息</div><div class="line">const int WM_CHANGECBCHAIN = 0x30D;</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Form_Load中把窗口添加到观察链中成为观察者，并保存下一个观察者的句柄</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//存放观察链中下一个窗口句柄   </div><div class="line">IntPtr NextClipHwnd;</div><div class="line">private void Form_Load(object sender, System.EventArgs e)</div><div class="line">&#123;  </div><div class="line">     //获得观察链中下一个窗口句柄</div><div class="line">    NextClipHwnd=SetClipboardViewer(this.Handle);           </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>重载WndProc方法，监视剪切板，并处理，并把剪切板变化的消息发送给下一个观察者</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">protected override void WndProc(ref System.Windows.Forms.Message m)</div><div class="line">&#123;</div><div class="line">    switch(m.Msg)</div><div class="line">    &#123;</div><div class="line">        case WM_DRAWCLIPBOARD:</div><div class="line">            //将WM_DRAWCLIPBOARD消息传递到下一个观察链中的窗口</div><div class="line">            SendMessage(NextClipHwnd,m.Msg,m.WParam,m.LParam);</div><div class="line"></div><div class="line">            //获取Clipboard内容，并处理</div><div class="line">            IDataObject iData = Clipboard.GetDataObject();</div><div class="line">            ...</div><div class="line">            ...</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            base.WndProc(ref m);</div><div class="line">            break;</div><div class="line">    &#125;       </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Form_Closed中撤消自己定义的观察者，并通知下一个观察者</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">private void Form_Closed(object sender, System.EventArgs e)</div><div class="line">&#123;</div><div class="line">    //从观察链中删除本观察窗口</div><div class="line">    ChangeClipboardChain(this.Handle,NextClipHwnd);</div><div class="line">    //将变动消息WM_CHANGECBCHAIN消息传递到下一个观察链中的窗口</div><div class="line">    SendMessage(NextClipHwnd,WM_CHANGECBCHAIN,this.Handle,NextClipHwnd);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li><strong>Form类中引入三个函数</strong>     </li>
 </ul>
-<h1 id="解决Clipboard冲突"><a href="#解决Clipboard冲突" class="headerlink" title="解决Clipboard冲突"></a><strong>解决Clipboard冲突</strong></h1><ul>
-<li>待补充  </li>
+<pre><code>// SetClipboardViewer 用于往观察链中添加一个窗口句柄，这个窗口就可成为观察链中的一员了，返回值指向下一个观察者
+[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]
+private static extern IntPtr SetClipboardViewer(IntPtr hwnd);
+
+//ChangeClipboardChain删除由hwnd指定的观察链成员，这是一个窗口句柄，第二个参数hWndNext是观察链中下一个窗口的句柄
+[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]
+private static extern IntPtr ChangeClipboardChain(IntPtr hwnd,IntPtr hWndNext);
+
+//SendMessage 发送消息
+[System.Runtime.InteropServices.DllImport(&quot;user32&quot;)]
+private static extern int SendMessage(IntPtr hwnd,int wMsg,IntPtr wParam,IntPtr lParam);
+
+//Clipboard内容变化消息
+const int WM_DRAWCLIPBOARD = 0x308;
+//Clipboard观察链变化消息
+const int WM_CHANGECBCHAIN = 0x30D;
+</code></pre><ul>
+<li><strong>Form_Load中把窗口添加到观察链中成为观察者，并保存下一个观察者的句柄</strong>     </li>
+</ul>
+<pre><code>//存放观察链中下一个窗口句柄   
+IntPtr NextClipHwnd;
+private void Form_Load(object sender, System.EventArgs e)
+{  
+     //获得观察链中下一个窗口句柄
+    NextClipHwnd=SetClipboardViewer(this.Handle);           
+}
+</code></pre><ul>
+<li><strong>重载WndProc方法，监视剪切板，并处理，并把剪切板变化的消息发送给下一个观察者</strong>     </li>
+</ul>
+<pre><code>protected override void WndProc(ref System.Windows.Forms.Message m)
+{
+    switch(m.Msg)
+    {
+        case WM_DRAWCLIPBOARD:
+            //将WM_DRAWCLIPBOARD消息传递到下一个观察链中的窗口
+            SendMessage(NextClipHwnd,m.Msg,m.WParam,m.LParam);
+
+            //获取Clipboard内容，并处理
+            IDataObject iData = Clipboard.GetDataObject();
+            ...
+            ...
+            break;
+        default:
+            base.WndProc(ref m);
+            break;
+    }       
+}
+</code></pre><ul>
+<li><strong>Form_Closed中撤消自己定义的观察者，并通知下一个观察者</strong>      </li>
+</ul>
+<pre><code>private void Form_Closed(object sender, System.EventArgs e)
+{
+    //从观察链中删除本观察窗口
+    ChangeClipboardChain(this.Handle,NextClipHwnd);
+    //将变动消息WM_CHANGECBCHAIN消息传递到下一个观察链中的窗口
+    SendMessage(NextClipHwnd,WM_CHANGECBCHAIN,this.Handle,NextClipHwnd);  
+}
+</code></pre><h1 id="解决Clipboard冲突"><a href="#解决Clipboard冲突" class="headerlink" title="解决Clipboard冲突"></a><strong>解决Clipboard冲突</strong></h1><ul>
+<li>待补充       </li>
 </ul>
 <h1 id="Demo"><a href="#Demo" class="headerlink" title="[Demo]"></a><strong>[<a href="https://github.com/xiong-ang/CShape_SLN" target="_blank" rel="external">Demo</a>]</strong></h1><ul>
-<li><strong>界面</strong><br><img src="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/ClipBoard.PNG?raw=true" alt="Alt text"></li>
-<li><strong>功能</strong><br>自动捕捉剪切板变化，并显示其中的文字、图片、文件以及自定义类型。</li>
+<li><p><strong>界面</strong><br><img src="https://github.com/xiong-ang/CShape_SLN/blob/master/Image/ClipBoard.PNG?raw=true" alt="Alt text">     </p>
+</li>
+<li><p><strong>功能</strong><br>自动捕捉剪切板变化，并显示其中的文字、图片、文件以及自定义类型。</p>
+</li>
 </ul>
 
       
@@ -534,7 +742,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -556,7 +764,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -611,7 +819,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Clipboard引荐"><span class="nav-number">1.</span> <span class="nav-text">Clipboard引荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让窗体自动响应Clipboard的变化"><span class="nav-number">2.</span> <span class="nav-text">让窗体自动响应Clipboard的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决Clipboard冲突"><span class="nav-number">3.</span> <span class="nav-text">解决Clipboard冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">[Demo]</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Clipboard引荐"><span class="nav-number">1.</span> <span class="nav-text">Clipboard引荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Clipboard保存-获取各种媒体"><span class="nav-number">2.</span> <span class="nav-text">使用Clipboard保存/获取各种媒体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让窗体自动响应Clipboard的变化"><span class="nav-number">3.</span> <span class="nav-text">让窗体自动响应Clipboard的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决Clipboard冲突"><span class="nav-number">4.</span> <span class="nav-text">解决Clipboard冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">5.</span> <span class="nav-text">[Demo]</span></a></li></ol></div>
             
 
           </div>

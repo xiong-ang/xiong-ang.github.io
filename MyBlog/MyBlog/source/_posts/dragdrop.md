@@ -20,37 +20,42 @@ categories: C#
 # **实现控件拖拽的典型流程**
 1. **设置AllowDrop**  
 在对一个控件进行拖拽编程时，我们必须把AllowDrop属性设置为True
-2. **拖动对象触发DragDrop**  
-```
+2. **拖动对象触发DragDrop**    
+
+```  
 private void listBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 {
-	this.listBox1.DoDragDrop("Drag Data", DragDropEffects.Move);
+    this.listBox1.DoDragDrop("Drag Data", DragDropEffects.Move);
 }
-```
-3. **拖到目标响应DragDrop**  
-```
+```    
+
+3. **拖到目标响应DragDrop**   
+
+```    
 private void listBox2_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
 {
-	if (e.Data.GetDataPresent(DataFormats.Text))
-	{
-		//设置DragDrop效果
-		e.Effect = DragDropEffects.Move;
-	}
+    if (e.Data.GetDataPresent(DataFormats.Text))
+    {
+        //设置DragDrop效果
+        e.Effect = DragDropEffects.Move;
+    }
 }
 
 private void listBox2_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
 {
-	//执行DragDrop逻辑
-	this.listBox2.Items.Add(e.Data.GetData(DataFormats.Text));
-	this.listBox1.Items.Remove(e.Data.GetData(DataFormats.Text));
+    //执行DragDrop逻辑
+    this.listBox2.Items.Add(e.Data.GetData(DataFormats.Text));
+    this.listBox1.Items.Remove(e.Data.GetData(DataFormats.Text));
 }
-```  
+```      
 
-# **控件拖拽的参数**
-```
+# **控件拖拽的参数**    
+
+```  
 public DragDropEffects DoDragDrop ( Object data,DragDropEffects allowedEffects)
-```
-* data：户所要拖动的数据内容。必须将所要拖动的内容传入到这个方法的第一个参数位置。并不是必须得，比如在不同应用间传递数据时，可以借由[剪切板](https://xiong-ang.github.io/2017/10/29/clipboard/)。  
+```       
+
+* **data：**户所要拖动的数据内容。必须将所要拖动的内容传入到这个方法的第一个参数位置。并不是必须的，比如在不同应用间传递数据时，可以借由[剪切板](https://xiong-ang.github.io/2017/10/29/clipboard/)。  
 # **控件拖拽的特效**
 控件拖拽的特效由DragDropEffects枚举来指定。
 * **DragDropEffects说明**  
