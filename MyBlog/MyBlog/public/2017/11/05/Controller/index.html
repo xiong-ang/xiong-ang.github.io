@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Code Coverage,CI," />
+  <meta name="keywords" content="Controller," />
 
 
 
@@ -94,20 +94,23 @@
 
 
 
-<meta name="description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="keywords" content="Code Coverage,CI">
+<meta name="description" content="继电器  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。      Pico控制器  Pi">
+<meta name="keywords" content="Controller">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta property="og:url" content="http://yoursite.com/2017/10/22/2017.10.22/index.html">
+<meta property="og:title" content="继电器--&gt;Pico控制器--&gt;可编程控制器PLC">
+<meta property="og:url" content="http://yoursite.com/2017/11/05/Controller/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
+<meta property="og:description" content="继电器  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。      Pico控制器  Pi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
-<meta property="og:updated_time" content="2017-10-23T12:26:48.124Z">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_base.PNG?raw=true">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_Work.PNG?raw=true">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/AIO.PNG?raw=true">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/DIO.PNG?raw=true">
+<meta property="og:updated_time" content="2017-11-05T05:25:37.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta name="twitter:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
+<meta name="twitter:title" content="继电器--&gt;Pico控制器--&gt;可编程控制器PLC">
+<meta name="twitter:description" content="继电器  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。      Pico控制器  Pi">
+<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_base.PNG?raw=true">
 
 
 
@@ -136,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/22/2017.10.22/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/05/Controller/"/>
 
 
 
 
 
-  <title>如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool) | Barret's Notes!</title>
+  <title>继电器-->Pico控制器-->可编程控制器PLC | Barret's Notes!</title>
   
 
 
@@ -275,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/2017.10.22/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/Controller/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Barret Xiong">
@@ -292,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)</h1>
+          <h1 class="post-title" itemprop="name headline">继电器-->Pico控制器-->可编程控制器PLC</h1>
         
 
         <div class="post-meta">
@@ -304,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T13:36:10+08:00">
-                2017-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T12:35:45+08:00">
+                2017-11-05
               </time>
             
 
@@ -327,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/source/categories/CI/" itemprop="url" rel="index">
-                    <span itemprop="name">CI</span>
+                  <a href="/source/categories/Product/" itemprop="url" rel="index">
+                    <span itemprop="name">Product</span>
                   </a>
                 </span>
 
@@ -345,9 +348,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/22/2017.10.22/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/05/Controller/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/22/2017.10.22/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/05/Controller/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,50 +378,47 @@
       
 
       
-        <blockquote>
-<p>由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。</p>
-</blockquote>
-<p><strong>Code Coverage</strong>，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。</p>
-<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true" alt=""></p>
-<ol>
-<li>Instrument，可以理解为配备或准备的意思，这一步使用的工具Vsinstr.exe，它需要将被测程序集名称作为参数，主要作用是将需要测量的程序集分块，并插入监听程序，在这个工程中，需要程序集对应的PDB文件。</li>
-<li>开启监听，并收集覆盖率。这一步用到的工具是Vsperfcmd.exe，它会开启一个监听程序Vsperfmon.exe,当Instrumented的程序集被覆盖到时，会Vsperfmon.exe会收到通知。</li>
-<li>运行测试用例。</li>
-<li>使用Vsperfcmd，输入与上面不同的参数，停止监听，生成Code Coverage报告。</li>
-</ol>
-<h2 id="遵循这四步的Workflow"><a href="#遵循这四步的Workflow" class="headerlink" title="遵循这四步的Workflow"></a>遵循这四步的Workflow</h2><ol>
-<li>首先安装需要分析Code Coverage的产品</li>
-<li>将PDB拷贝到程序集所在的目录，这里需要注意的是，我们需要分析Code Coverage的程序集有可能并不是都在一个目录，这时，需要我们将PDB文件拷贝到多个地方。</li>
-<li>编写脚本</li>
-</ol>
-<blockquote>
-<ul>
-<li><p>Instrumt </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Vsinstr -coverage &lt;myprojectbinary  the dll/exe&gt;</div><div class="line">...</div><div class="line">Vsinstr -coverage &lt;myprojectbinary the dll/exe&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>开始脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">VSPerfCmd.exe /start:coverage /output:&quot;*.Coverage&quot;</div><div class="line">或</div><div class="line">Start vsperfmon -coverage -output:mytestrun.coverage</div></pre></td></tr></table></figure>
-</li>
-<li><p>结束脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vsperfcmd –shutdown</div></pre></td></tr></table></figure>
-</li>
+        <h1 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h1><p>  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。<br>  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。<br>  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。     </p>
+<h1 id="Pico控制器"><a href="#Pico控制器" class="headerlink" title="Pico控制器"></a>Pico控制器</h1><p>  Pico是一种紧凑、友好、廉价的控制器，提供简单的逻辑、定时、计数和实时时钟操作。<br>  为增强性能，Pico GFX增加了图形画面的使用,提供高级编程特征:如PID控制,高速计数器，以及位序列。<br>  Pico是替代继电器应用的理想选择，适合于简单控制应用，如楼宇、暖通空调、停车场照明以及一些对成本要求很严的场合。<br>  Pico控制器所有的编程和数据调整都能够通过面板上的键盘和显示来完成，或者利用Allen-Bradley的PicoSoft和PicoSoft Pro配置软件来完成。     </p>
+<h1 id="可编程控制器PLC"><a href="#可编程控制器PLC" class="headerlink" title="可编程控制器PLC"></a>可编程控制器PLC</h1><p>  可编程控制器（Programmable Logic Controller）简称PLC，是一种通用的工业控制装置，其组成与一般的微机系统基本相似。<br>  它采用可以编制程序的存储器，用来在执行存储逻辑运算和顺序控制、定时、计数和算术运算等操作的指令，并通过数字或模拟的输入(I)和输出(O)接口，控制各种类型的机械设备或生产过程。PLC基本组成如下图所示：<br>  <img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_base.PNG?raw=true" alt=""><br>  可编程控制器是在电器控制技术和计算机技术的基础上开发出来的，并逐渐发展成为以微处理器为核心，把自动化技术、计算机技术、通讯技术融为一体的新型工业控制装置。PLC工作过程如下图所示：<br>  <img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_Work.PNG?raw=true" alt=""><br>  目前，PLC已被广泛应用于各种生产机械和生产过程的自动控制中，成为一种最重要、最普及、应用场合最多的工业控制装置，被公认为现代工业自动化的三大支柱（PLC、机器人、CAD/CAM）之一。    </p>
+<h1 id="Rockwell系列PLC"><a href="#Rockwell系列PLC" class="headerlink" title="Rockwell系列PLC"></a>Rockwell系列PLC</h1><h2 id="Logix系统控制器类型"><a href="#Logix系统控制器类型" class="headerlink" title="Logix系统控制器类型"></a>Logix系统控制器类型</h2><ul>
+<li>ControlLogix控制器            </li>
+<li>CompactLogix控制器              </li>
+<li>FlexLogix控制器            </li>
+<li>SoftLogix控制器          </li>
+<li>DriveLogix控制器                </li>
 </ul>
-</blockquote>
-<ol>
-<li>运行开始脚本，这一步做的是Instrumt,并且开始监控</li>
-<li>运行测试用例</li>
-<li>运行结束脚本，这一步的作用是结束监听，并且生成报告</li>
-</ol>
-<h2 id="最后值得注意的事项"><a href="#最后值得注意的事项" class="headerlink" title="最后值得注意的事项"></a>最后值得注意的事项</h2><ol>
-<li>在分析Code Coverage的过程中，后台会启动一个VSPerfMon.exed的进程，用于收集Code Coverage信息，只要这个进程结束，收集会终止，所以在这个过程中，关机或者手动关闭这个进程，都会影响分析结果的准确性。</li>
-<li>得到的*.coverage文件是与Instrumented的程序集以及PDB文件相关联的，如果需要保存和转移，微软官网给我们的建议是通过VS转换成XML格式。</li>
-<li>Instrument过程中需要程序集的名字作为参数，这意味着，如果我们项目工程增多了，需要对新增加的程序集进行分析，就需要修改脚本。</li>
-<li>第四点值得开发人员注意，微软根据Block的概念计算Code Coverage，而Block的概念是与Instrumented 程序集中的CIL对应的，并不是我们实际的Code，所以我们如果我们从Code文本出发来理解VS中Code Coverage百分比时，往往会比较迷惑。实际上，我们也没有必要这样去做。</li>
-<li>Last but not least, 最权威的资料: [<a href="https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx</a>]</li>
-</ol>
-<blockquote>
-<p>本文作者–Barret Xiong–<br>转载请注明出处！</p>
-</blockquote>
+<h2 id="Logix系统常见硬件类型"><a href="#Logix系统常见硬件类型" class="headerlink" title="Logix系统常见硬件类型"></a>Logix系统常见硬件类型</h2><ul>
+<li>机架<br>（1）1756-A4/B、1756-A7/B、1756-A10/B、1756-A13/B、1756-A17/B<br>（2）4槽、7槽、10槽、13槽、17槽机架        </li>
+<li>电源模块<br>（1）非冗余（1756-PA72，1756-PB72，1756-PA75，1756-PB75）<br>冗余（1756-PA75R，1756- PB75R）<br>（2）1756-PA72 电源（220VAC/5VDC 10A）<br>   1756-PA75 电源（220VAC/5VDC 13A）<br>   1756-PB72 电源（24VDC/5VDC 10A）<br>   1756-PB75 电源（24VDC/5VDC 13A）         </li>
+<li>CPU模块<br>（1）1756-L55系列，1756-L55M12、1756-L55M16、1756-L55M22、1756-L55M24<br>（2）1756-L6x系列，1756-L61、1756-L62、1756-L63、1756-L65<br>（3）1756-L7x系列，1756-L71、1756-L72、1756-L73、1756-L75               </li>
+<li>通讯模块<br>EtherNet通讯模块，1756-ENBT、1756-EN2T、1756-EN2TR<br>ControlNet通讯模块，1756-CNB、1756-CNBR、1756-CN2、1756-CN2R<br>DeviceNet通讯模块，1756-DNB             </li>
+<li>DI模块<br>（1）1756-IB16，1756-IB32（12/24V DC）<br>（2）1756-IM16I（220V AC）                 </li>
+<li>DO模块<br>（1）1756-OB8、1756-OB16、1756-OB32（12/24V DC）</li>
+<li>AI模块<br>常规，1756-IF8、1756-IF16<br>热电阻模块，1756-IR6I<br>热电偶模块，1756-IT6I              </li>
+<li>AO模块<br>（1）1756-OF4、1756-OF8、1756-IF4FXOF2F              </li>
+<li>其他<br>（1）1756-HSC，高速计数器模块</li>
+</ul>
+<h2 id="ControlLogix硬件特性"><a href="#ControlLogix硬件特性" class="headerlink" title="ControlLogix硬件特性"></a>ControlLogix硬件特性</h2><ul>
+<li>框架：      1756-A7/B（本地7槽机架）、1756-A10/B（远程10槽机架）          </li>
+<li>控制器型号：1756-L<em>**</em>                       </li>
+<li>电源模块：    1756-PA72/C，120/240VAC，50/60Hz                 </li>
+<li>通讯模块：  1756-ENBT，1756-CN2R,1756-CNBR,1756-DNB          </li>
+<li>I/O模块：<br>1756-IR6I，    6通道，热电阻模块<br>1756-IF8，        8通道，模拟量输入模块<br>1756-OF8，    8通道，模拟量输出模块<br>1756-IT6I，        6通道，热电偶模块<br>1756-IB16，    16点，数字量输入模块（DC24V）<br>1756-OB16E，  16点，数字量输出模块（DC24V）<br><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/AIO.PNG?raw=true" alt=""><br><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/DIO.PNG?raw=true" alt="">    </li>
+<li>通讯方式：RS232/DH-485串口通讯、EtherNet网络通讯         </li>
+<li>DC24V电源：AB-1606-XL          </li>
+<li>其他：1756-HSC 高速计数 1756-PLS 限位控制 </li>
+<li>系统设计目标：将多种控制方式集成在单一的控制器上，集成了顺序控制、运动控制、传动控制、过程控制。      </li>
+</ul>
+<h2 id="CompactLogix硬件特性"><a href="#CompactLogix硬件特性" class="headerlink" title="CompactLogix硬件特性"></a>CompactLogix硬件特性</h2><ul>
+<li>框架：        无</li>
+<li>处理器：        1769-L<em>*</em>    </li>
+<li>电源模块：    1769-PA4，120/240VAC，50/60Hz     </li>
+<li>通讯模块：  1769-SDN，DeviceNet网络适配器     </li>
+<li>I/O模块：<br>1769-IF8，      8通道，模拟量输入模块<br>1769-IQ16，    16点，数字量输入模块（DC24V）<br>1769-OF4CI，   4通道，模拟量输出模块<br>1769-OB16，     16点，数字量输出模块（DC24V）              </li>
+<li>通讯方式：RS232/DH-485串口通信、EtherNet网络通讯</li>
+<li>DC24V电源：AB-1606-XL</li>
+</ul>
 
       
     </div>
@@ -436,9 +436,7 @@
       
         <div class="post-tags">
           
-            <a href="/source/tags/Code-Coverage/" rel="tag"># Code Coverage</a>
-          
-            <a href="/source/tags/CI/" rel="tag"># CI</a>
+            <a href="/source/tags/Controller/" rel="tag"># Controller</a>
           
         </div>
       
@@ -451,15 +449,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/31/goal/" rel="next" title="知识积累规划">
+                <i class="fa fa-chevron-left"></i> 知识积累规划
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/29/clipboard/" rel="prev" title="C# Clipboard使用（How to Use Clipboard in C#）">
-                C# Clipboard使用（How to Use Clipboard in C#） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用微软命令行工具分析Code-Coverage"><span class="nav-number">1.</span> <span class="nav-text">使用微软命令行工具分析Code Coverage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遵循这四步的Workflow"><span class="nav-number">2.</span> <span class="nav-text">遵循这四步的Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后值得注意的事项"><span class="nav-number">3.</span> <span class="nav-text">最后值得注意的事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#继电器"><span class="nav-number">1.</span> <span class="nav-text">继电器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pico控制器"><span class="nav-number">2.</span> <span class="nav-text">Pico控制器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可编程控制器PLC"><span class="nav-number">3.</span> <span class="nav-text">可编程控制器PLC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rockwell系列PLC"><span class="nav-number">4.</span> <span class="nav-text">Rockwell系列PLC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logix系统控制器类型"><span class="nav-number">4.1.</span> <span class="nav-text">Logix系统控制器类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logix系统常见硬件类型"><span class="nav-number">4.2.</span> <span class="nav-text">Logix系统常见硬件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ControlLogix硬件特性"><span class="nav-number">4.3.</span> <span class="nav-text">ControlLogix硬件特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CompactLogix硬件特性"><span class="nav-number">4.4.</span> <span class="nav-text">CompactLogix硬件特性</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -752,9 +750,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/22/2017.10.22/';
-          this.page.identifier = '2017/10/22/2017.10.22/';
-          this.page.title = '如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)';
+          this.page.url = 'http://yoursite.com/2017/11/05/Controller/';
+          this.page.identifier = '2017/11/05/Controller/';
+          this.page.title = '继电器-->Pico控制器-->可编程控制器PLC';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://评论.disqus.com/embed.js';
