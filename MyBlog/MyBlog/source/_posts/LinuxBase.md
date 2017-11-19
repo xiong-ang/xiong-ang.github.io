@@ -37,7 +37,7 @@ categories: Linux
 # Linux文件目录                    
 1. 特点: 级层式的树状目录结构                   
 2. 整体目录结构图                              
-![](www.tupian.com)                      
+![](https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/FileSystem.png?raw=true)                      
 3. root:存放root用户相关的文件               
 4. home:存放普通用户的相关文件               
 5. bin: 存放普通命令的目录                   
