@@ -1,5 +1,5 @@
 ---
-title: LinuxBase
+title: Linux基础
 date: 2017-11-19 12:38:40
 tags: Linux
 categories: Linux
@@ -7,6 +7,7 @@ categories: Linux
 # Linux初步介绍                    
 1. 特点：免费/开源、支持多用户、安全          
 2. linux最小内存需要4M        
+
 # 基本命令            
 1. 关机: shutdown -h now         
 2. 重启: shutdown -r now         
@@ -30,10 +31,12 @@ categories: Linux
 20. 管道: |                            
 21. 搜索文件及目录: find                
 22. 重定向: >覆盖写；>>末尾添加；<反向传          
-23. 查看文件: cat
+23. 查看文件: cat                 
+
 # vi编辑器                              
 1. 创建文件: vi  文件名          
-2. 三种模式:1.Comandmode-->控制屏幕光标的移动，字符或光标的删除，移动复制某区段；2.Insertmode：-->文字数据输入;3.Lastline mode-->将储存文件或离开编辑器，也可设置编辑环境[命令总结](https://www.cnblogs.com/jiayongji/p/5771444.html)                      
+2. 三种模式:1.Comandmode-->控制屏幕光标的移动，字符或光标的删除，移动复制某区段；2.Insertmode：-->文字数据输入;3.Lastline mode-->将储存文件或离开编辑器，也可设置编辑环境[命令总结](https://www.cnblogs.com/jiayongji/p/5771444.html)                       
+
 # Linux文件目录                    
 1. 特点: 级层式的树状目录结构                   
 2. 整体目录结构图                              
@@ -46,12 +49,14 @@ categories: Linux
 8. usr: 用户软件默认安装位置                 
 9. boot: 存放引导相关的文件                  
 10. etc: 存放配置相关的文件                  
-11. var: 存放经常变化的文件                  
+11. var: 存放经常变化的文件                             
+
 # Linux用户管理                     
 1. 添加用户: useradd 用户名                  
 2. 设置密码: passwd 用户名                   
 3. 删除用户: userdel 用户名                  
-4. 删除用户及主目录: userdel -r 用户名       
+4. 删除用户及主目录: userdel -r 用户名                        
+
 # Linux用户组和权限管理                
 1. Linux中每一个用户都属于某个组                    
 2. 添加组: groupadd 组名                           
@@ -62,7 +67,8 @@ categories: Linux
 7. 改变权限: chmod,比如chmod 777 文件名          
 8. root改变用户组: usermod -g 组名 用户名        
 9. 修改文件所有者: chown 用户名 文件名           
-10. 修改文件所有组: chgrp 组名 文件名            
+10. 修改文件所有组: chgrp 组名 文件名                               
+
 # Linux常用技巧                  
 1. 运行级别:0-->关机；1-->单用户；2-->多用户，没有网络；3-->多用户，用网络；4-->系统保留；5-->图形界面；6-->系统重启。修改：/etc/inittab - id:5:initdefault:。如果配置错误，在进入grub引导页面按“e”，再按“e”，在grub输入1进入单用户模式修改                      
 2. 挂载/卸载分区文件: 1.挂载光驱: mount /mnt/cdrom/;2.卸载光驱: umount /mnt/cdrom;            
