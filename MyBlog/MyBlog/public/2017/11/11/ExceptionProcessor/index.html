@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Code Coverage,CI," />
+  <meta name="keywords" content="Exception,C#," />
 
 
 
@@ -94,20 +94,18 @@
 
 
 
-<meta name="description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="keywords" content="Code Coverage,CI">
+<meta name="description" content="异常处理规则 不要抛出“new Exception()”–&amp;gt;抽象的异常往往让人迷惑           不要只记录Exception.Message的值，还需要记录Exception.ToString()–&amp;gt;Exception.ToString()包含“堆栈跟踪”信息      catch要捕捉具体异常–&amp;gt;好的代码只捕捉知道的异常       using使用–&amp;gt;异常发生时，">
+<meta name="keywords" content="Exception,C#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta property="og:url" content="http://yoursite.com/2017/10/22/2017.10.22/index.html">
+<meta property="og:title" content="C#中的异常处理(Exception Process in C#)">
+<meta property="og:url" content="http://yoursite.com/2017/11/11/ExceptionProcessor/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
+<meta property="og:description" content="异常处理规则 不要抛出“new Exception()”–&amp;gt;抽象的异常往往让人迷惑           不要只记录Exception.Message的值，还需要记录Exception.ToString()–&amp;gt;Exception.ToString()包含“堆栈跟踪”信息      catch要捕捉具体异常–&amp;gt;好的代码只捕捉知道的异常       using使用–&amp;gt;异常发生时，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
-<meta property="og:updated_time" content="2017-10-23T12:26:48.124Z">
+<meta property="og:updated_time" content="2017-11-11T12:00:06.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)">
-<meta name="twitter:description" content="由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。  Code Coverage，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。 使用微软命令行工具分析Code Cover">
-<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true">
+<meta name="twitter:title" content="C#中的异常处理(Exception Process in C#)">
+<meta name="twitter:description" content="异常处理规则 不要抛出“new Exception()”–&amp;gt;抽象的异常往往让人迷惑           不要只记录Exception.Message的值，还需要记录Exception.ToString()–&amp;gt;Exception.ToString()包含“堆栈跟踪”信息      catch要捕捉具体异常–&amp;gt;好的代码只捕捉知道的异常       using使用–&amp;gt;异常发生时，">
 
 
 
@@ -136,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/22/2017.10.22/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/11/ExceptionProcessor/"/>
 
 
 
 
 
-  <title>如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool) | Barret's Notes!</title>
+  <title>C#中的异常处理(Exception Process in C#) | Barret's Notes!</title>
   
 
 
@@ -275,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/2017.10.22/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/11/ExceptionProcessor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Barret Xiong">
@@ -292,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)</h1>
+          <h1 class="post-title" itemprop="name headline">C#中的异常处理(Exception Process in C#)</h1>
         
 
         <div class="post-meta">
@@ -304,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T13:36:10+08:00">
-                2017-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-11T16:27:15+08:00">
+                2017-11-11
               </time>
             
 
@@ -327,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/source/categories/CI/" itemprop="url" rel="index">
-                    <span itemprop="name">CI</span>
+                  <a href="/source/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
                   </a>
                 </span>
 
@@ -345,9 +343,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/22/2017.10.22/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/11/ExceptionProcessor/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/22/2017.10.22/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/11/ExceptionProcessor/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,51 +373,36 @@
       
 
       
-        <blockquote>
-<p>由于项目CI方面需求，前段时间学习和使用了微软的代码覆盖率（Code Coverage）分析工具，当时着手做时，发现网上资料非常欠缺，遇到了不少坑，在此做个总结，希望能帮到有这方面需求的人。</p>
-</blockquote>
-<p><strong>Code Coverage</strong>，代码覆盖率，是CI的需求一部分。微软VS ultimate版本提供了测试Code Coverage的选项，也提供了相应的命令行工具。</p>
-<h2 id="使用微软命令行工具分析Code-Coverage"><a href="#使用微软命令行工具分析Code-Coverage" class="headerlink" title="使用微软命令行工具分析Code Coverage"></a>使用微软命令行工具分析Code Coverage</h2><p><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/codecoverage.PNG?raw=true" alt=""></p>
-<ol>
-<li>Instrument，可以理解为配备或准备的意思，这一步使用的工具Vsinstr.exe，它需要将被测程序集名称作为参数，主要作用是将需要测量的程序集分块，并插入监听程序，在这个工程中，需要程序集对应的PDB文件。</li>
-<li>开启监听，并收集覆盖率。这一步用到的工具是Vsperfcmd.exe，它会开启一个监听程序Vsperfmon.exe,当Instrumented的程序集被覆盖到时，会Vsperfmon.exe会收到通知。</li>
-<li>运行测试用例。</li>
-<li>使用Vsperfcmd，输入与上面不同的参数，停止监听，生成Code Coverage报告。</li>
+        <h1 id="异常处理规则"><a href="#异常处理规则" class="headerlink" title="异常处理规则"></a>异常处理规则</h1><ol>
+<li>不要抛出“new Exception()”–&gt;抽象的异常往往让人迷惑          </li>
+<li>不要只记录Exception.Message的值，还需要记录Exception.ToString()–&gt;Exception.ToString()包含“堆栈跟踪”信息     </li>
+<li>catch要捕捉具体异常–&gt;好的代码只捕捉知道的异常      </li>
+<li>using使用–&gt;异常发生时，using能放在资源泄露              </li>
+<li>新异常应将原始异常作为其内部异常            </li>
+<li>catch抛出新异常会导致call stack丢失–&gt;不处理异常时可以“throw;”              </li>
 </ol>
-<h2 id="遵循这四步的Workflow"><a href="#遵循这四步的Workflow" class="headerlink" title="遵循这四步的Workflow"></a>遵循这四步的Workflow</h2><ol>
-<li>首先安装需要分析Code Coverage的产品</li>
-<li>将PDB拷贝到程序集所在的目录，这里需要注意的是，我们需要分析Code Coverage的程序集有可能并不是都在一个目录，这时，需要我们将PDB文件拷贝到多个地方。</li>
-<li>编写脚本</li>
-</ol>
-<blockquote>
-<ul>
-<li><p>Instrumt </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Vsinstr -coverage &lt;myprojectbinary  the dll/exe&gt;</div><div class="line">...</div><div class="line">Vsinstr -coverage &lt;myprojectbinary the dll/exe&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>开始脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">VSPerfCmd.exe /start:coverage /output:&quot;*.Coverage&quot;</div><div class="line">或</div><div class="line">Start vsperfmon -coverage -output:mytestrun.coverage</div></pre></td></tr></table></figure>
-</li>
-<li><p>结束脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vsperfcmd –shutdown</div></pre></td></tr></table></figure>
-</li>
+<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><pre><code>public class SQLException : Exception
+{
+    public SQLException(string message) : base(message)
+    {
+    }
+}
+</code></pre><h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><ul>
+<li><strong>应用程序处理未捕获的异常</strong>              </li>
 </ul>
+<pre><code>static void InitUnhandledException()
+{
+    AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+}
+static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+{
+    var exception = unhandledExceptionEventArgs.ExceptionObject as Exception;
+    //Log
+}
+</code></pre><blockquote>
+<p>未捕获的异常，通常就是运行时期的<strong>BUG</strong>，于是我们可以在UnhandledException的注册事件方法CurrentDomain_UnhandledException中将未捕获异常的信息<strong>记录在日志中</strong>。值得注意的是，UnhandledException提供的机制并不能阻止应用程序终止，也就是说，CurrentDomain_UnhandledException方法执行后，应用程序就会被终止。当然，这只是处理Console的未处理异常，还有更多<a href="http://www.cnblogs.com/luminji/archive/2011/01/05/1926033.html" target="_blank" rel="external">相关细节</a>。          </p>
 </blockquote>
-<ol>
-<li>运行开始脚本，这一步做的是Instrumt,并且开始监控</li>
-<li>运行测试用例</li>
-<li>运行结束脚本，这一步的作用是结束监听，并且生成报告</li>
-</ol>
-<h2 id="最后值得注意的事项"><a href="#最后值得注意的事项" class="headerlink" title="最后值得注意的事项"></a>最后值得注意的事项</h2><ol>
-<li>在分析Code Coverage的过程中，后台会启动一个VSPerfMon.exed的进程，用于收集Code Coverage信息，只要这个进程结束，收集会终止，所以在这个过程中，关机或者手动关闭这个进程，都会影响分析结果的准确性。</li>
-<li>得到的*.coverage文件是与Instrumented的程序集以及PDB文件相关联的，如果需要保存和转移，微软官网给我们的建议是通过VS转换成XML格式。</li>
-<li>Instrument过程中需要程序集的名字作为参数，这意味着，如果我们项目工程增多了，需要对新增加的程序集进行分析，就需要修改脚本。</li>
-<li>第四点值得开发人员注意，微软根据Block的概念计算Code Coverage，而Block的概念是与Instrumented 程序集中的CIL对应的，并不是我们实际的Code，所以我们如果我们从Code文本出发来理解VS中Code Coverage百分比时，往往会比较迷惑。实际上，我们也没有必要这样去做。</li>
-<li>Last but not least, 最权威的资料: [<a href="https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd299398(v=vs.90).aspx</a>]</li>
-</ol>
-<blockquote>
-<p>本文作者–Barret Xiong–<br>转载请注明出处！</p>
-</blockquote>
-
+<h1 id="异常报告–CrashReporter-NET功能介绍"><a href="#异常报告–CrashReporter-NET功能介绍" class="headerlink" title="异常报告–CrashReporter.NET功能介绍"></a>异常报告–CrashReporter.NET功能介绍</h1>
       
     </div>
     
@@ -436,9 +419,9 @@
       
         <div class="post-tags">
           
-            <a href="/source/tags/Code-Coverage/" rel="tag"># Code Coverage</a>
+            <a href="/source/tags/Exception/" rel="tag"># Exception</a>
           
-            <a href="/source/tags/CI/" rel="tag"># CI</a>
+            <a href="/source/tags/C/" rel="tag"># C#</a>
           
         </div>
       
@@ -451,14 +434,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/05/DesignPattern/" rel="next" title="设计模式(Design Pattern)">
+                <i class="fa fa-chevron-left"></i> 设计模式(Design Pattern)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/29/clipboard/" rel="prev" title="C# Clipboard使用（How to Use Clipboard in C#）">
-                C# Clipboard使用（How to Use Clipboard in C#） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/11/wpf-mvvm/" rel="prev" title="wpf_mvvm">
+                wpf_mvvm <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -620,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用微软命令行工具分析Code-Coverage"><span class="nav-number">1.</span> <span class="nav-text">使用微软命令行工具分析Code Coverage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遵循这四步的Workflow"><span class="nav-number">2.</span> <span class="nav-text">遵循这四步的Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后值得注意的事项"><span class="nav-number">3.</span> <span class="nav-text">最后值得注意的事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理规则"><span class="nav-number">1.</span> <span class="nav-text">异常处理规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义异常"><span class="nav-number">2.</span> <span class="nav-text">自定义异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理"><span class="nav-number">3.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常报告–CrashReporter-NET功能介绍"><span class="nav-number">4.</span> <span class="nav-text">异常报告–CrashReporter.NET功能介绍</span></a></li></ol></div>
             
 
           </div>
@@ -752,9 +739,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/22/2017.10.22/';
-          this.page.identifier = '2017/10/22/2017.10.22/';
-          this.page.title = '如何自动化分析代码覆盖率(How to Use the Code Coverage Analysis Tool)';
+          this.page.url = 'http://yoursite.com/2017/11/11/ExceptionProcessor/';
+          this.page.identifier = '2017/11/11/ExceptionProcessor/';
+          this.page.title = 'C#中的异常处理(Exception Process in C#)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://评论.disqus.com/embed.js';
