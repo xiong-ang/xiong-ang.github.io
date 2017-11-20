@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Linux初步介绍 特点：免费/开源、支持多用户、安全           linux最小内存需要4M          基本命令 关机: shutdown -h now          重启: shutdown -r now          重启: reboot                   进入图形界面: startx            用户注销: logout">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础">
+<meta property="og:url" content="http://yoursite.com/2017/11/19/LinuxBase/index.html">
+<meta property="og:site_name" content="Barret&#39;s Notes!">
+<meta property="og:description" content="Linux初步介绍 特点：免费/开源、支持多用户、安全           linux最小内存需要4M          基本命令 关机: shutdown -h now          重启: shutdown -r now          重启: reboot                   进入图形界面: startx            用户注销: logout">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/FileSystem.png?raw=true">
+<meta property="og:updated_time" content="2017-11-20T12:17:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基础">
+<meta name="twitter:description" content="Linux初步介绍 特点：免费/开源、支持多用户、安全           linux最小内存需要4M          基本命令 关机: shutdown -h now          重启: shutdown -r now          重启: reboot                   进入图形界面: startx            用户注销: logout">
+<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/FileSystem.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/19/LinuxBase/"/>
+
+
+
+
+
+  <title>Linux基础 | Barret's Notes!</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Barret's Notes!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个勤奋程序员的总结。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/19/LinuxBase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Barret Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Barret's Notes!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T12:38:40+08:00">
+                2017-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/source/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/19/LinuxBase/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/19/LinuxBase/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux初步介绍"><a href="#Linux初步介绍" class="headerlink" title="Linux初步介绍"></a>Linux初步介绍</h1><ol>
+<li>特点：免费/开源、支持多用户、安全          </li>
+<li>linux最小内存需要4M        </li>
+</ol>
+<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><ol>
+<li>关机: shutdown -h now         </li>
+<li>重启: shutdown -r now         </li>
+<li>重启: reboot                  </li>
+<li>进入图形界面: startx           </li>
+<li>用户注销: logout              </li>
+<li>切换身份: su                  </li>
+<li>以管理员身份允许: sudo        </li>
+<li>查看文件: ls/ls -la           </li>
+<li>显示当前路径: pwd             </li>
+<li>创建目录: mkdir             </li>
+<li>删除目录: rmdir             </li>
+<li>删除文件: rm                </li>
+<li>建立空文件: touch           </li>
+<li>复制: cp                    </li>
+<li>移动文件: mv                </li>
+<li>删除所有内容: rm -rf        </li>
+<li>建立符号连接: ln            </li>
+<li>显示文件内容，带分页: more/less     </li>
+<li>在文本中查询内容: grep              </li>
+<li>管道: |                            </li>
+<li>搜索文件及目录: find                </li>
+<li>重定向: &gt;覆盖写；&gt;&gt;末尾添加；&lt;反向传          </li>
+<li>查看文件: cat                 </li>
+</ol>
+<h1 id="vi编辑器"><a href="#vi编辑器" class="headerlink" title="vi编辑器"></a>vi编辑器</h1><ol>
+<li>创建文件: vi  文件名          </li>
+<li>三种模式:1.Comandmode–&gt;控制屏幕光标的移动，字符或光标的删除，移动复制某区段；2.Insertmode：–&gt;文字数据输入;3.Lastline mode–&gt;将储存文件或离开编辑器，也可设置编辑环境<a href="https://www.cnblogs.com/jiayongji/p/5771444.html" target="_blank" rel="external">命令总结</a>                       </li>
+</ol>
+<h1 id="Linux文件目录"><a href="#Linux文件目录" class="headerlink" title="Linux文件目录"></a>Linux文件目录</h1><ol>
+<li>特点: 级层式的树状目录结构                   </li>
+<li>整体目录结构图<br><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/FileSystem.png?raw=true" alt="">                      </li>
+<li>root:存放root用户相关的文件               </li>
+<li>home:存放普通用户的相关文件               </li>
+<li>bin: 存放普通命令的目录                   </li>
+<li>sbin: 具有一定权限才能使用的命令          </li>
+<li>mnt: 默认挂载软驱和光驱的目录             </li>
+<li>usr: 用户软件默认安装位置                 </li>
+<li>boot: 存放引导相关的文件                  </li>
+<li>etc: 存放配置相关的文件                  </li>
+<li>var: 存放经常变化的文件                             </li>
+</ol>
+<h1 id="Linux用户管理"><a href="#Linux用户管理" class="headerlink" title="Linux用户管理"></a>Linux用户管理</h1><ol>
+<li>添加用户: useradd 用户名                  </li>
+<li>设置密码: passwd 用户名                   </li>
+<li>删除用户: userdel 用户名                  </li>
+<li>删除用户及主目录: userdel -r 用户名                        </li>
+</ol>
+<h1 id="Linux用户组和权限管理"><a href="#Linux用户组和权限管理" class="headerlink" title="Linux用户组和权限管理"></a>Linux用户组和权限管理</h1><ol>
+<li>Linux中每一个用户都属于某个组                    </li>
+<li>添加组: groupadd 组名                           </li>
+<li>查看所有组文件: /etc/group                      </li>
+<li>创建用户并分配组: useradd -g 组名 用户名         </li>
+<li>查看所有用户文件: /etc/passwd                   </li>
+<li>d|rwx|rwx|rwx:1.文件类型（文件-/文件夹d/链接l）；2.文件所有者对文件权限（读4/写2/可执行1）；3.文件所在组用户对文件的权限；4.其他组用户对文件的权限                     </li>
+<li>改变权限: chmod,比如chmod 777 文件名          </li>
+<li>root改变用户组: usermod -g 组名 用户名        </li>
+<li>修改文件所有者: chown 用户名 文件名           </li>
+<li>修改文件所有组: chgrp 组名 文件名                               </li>
+</ol>
+<h1 id="Linux常用技巧"><a href="#Linux常用技巧" class="headerlink" title="Linux常用技巧"></a>Linux常用技巧</h1><ol>
+<li>运行级别:0–&gt;关机；1–&gt;单用户；2–&gt;多用户，没有网络；3–&gt;多用户，用网络；4–&gt;系统保留；5–&gt;图形界面；6–&gt;系统重启。修改：/etc/inittab - id:5:initdefault:。如果配置错误，在进入grub引导页面按“e”，再按“e”，在grub输入1进入单用户模式修改                      </li>
+<li>挂载/卸载分区文件: 1.挂载光驱: mount /mnt/cdrom/;2.卸载光驱: umount /mnt/cdrom;            </li>
+<li>Linux不由后缀区分可执行文件，有x权限的文件是可执行文件，执行可执行文件:./文件名               </li>
+<li>安装压缩文件: tar -zxvf *.tar.gz             </li>
+<li>硬盘分区: 1.主分区（系统所在分区）、扩展分区（不能直接使用，可分成若干个逻辑分区）；2.一块硬盘上，主分区和扩展分区总数不超过4个；3.Windows分区标识与目录对应，Linux硬盘分区与目录结构对应不明确，各分区都是挂载在目录树上；4.查看Linux分区情况：fdisk -l；5.查看目录挂载的分区: df 目录；6.查看磁盘使用情况: df -h                        </li>
+<li>Linux安装: 1.分区：/boot分区 100M；swap交换分区 一般是物理内存的两倍，不要大于256M；/根分区 尽可能大；2.swap相当于扩展内存，在系统的物理内存不够用的时候，该空间供当前运行的程序使用                                </li>
+<li>Linux Shell:1.查看当前使用的shell:env;2.修改shell:chsh -s 新的shell如/bin/csh                </li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/StrongName/" rel="next" title="StrongName">
+                <i class="fa fa-chevron-left"></i> StrongName
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/timg.jpg"
+               alt="Barret Xiong" />
+          <p class="site-author-name" itemprop="name">Barret Xiong</p>
+           
+              <p class="site-description motion-element" itemprop="description">Be Excellent, Never Give in!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiong-ang/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:xiong.ang@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux初步介绍"><span class="nav-number">1.</span> <span class="nav-text">Linux初步介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本命令"><span class="nav-number">2.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vi编辑器"><span class="nav-number">3.</span> <span class="nav-text">vi编辑器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文件目录"><span class="nav-number">4.</span> <span class="nav-text">Linux文件目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux用户管理"><span class="nav-number">5.</span> <span class="nav-text">Linux用户管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux用户组和权限管理"><span class="nav-number">6.</span> <span class="nav-text">Linux用户组和权限管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用技巧"><span class="nav-number">7.</span> <span class="nav-text">Linux常用技巧</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Barret Xiong</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://评论.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/19/LinuxBase/';
+          this.page.identifier = '2017/11/19/LinuxBase/';
+          this.page.title = 'Linux基础';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://评论.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

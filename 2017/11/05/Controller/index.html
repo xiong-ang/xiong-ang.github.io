@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Controller," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="继电器  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。      Pico控制器  Pi">
+<meta name="keywords" content="Controller">
+<meta property="og:type" content="article">
+<meta property="og:title" content="继电器--&gt;Pico控制器--&gt;可编程控制器PLC">
+<meta property="og:url" content="http://yoursite.com/2017/11/05/Controller/index.html">
+<meta property="og:site_name" content="Barret&#39;s Notes!">
+<meta property="og:description" content="继电器  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。      Pico控制器  Pi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_base.PNG?raw=true">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_Work.PNG?raw=true">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/AIO.PNG?raw=true">
+<meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/DIO.PNG?raw=true">
+<meta property="og:updated_time" content="2017-11-20T12:17:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="继电器--&gt;Pico控制器--&gt;可编程控制器PLC">
+<meta name="twitter:description" content="继电器  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。      Pico控制器  Pi">
+<meta name="twitter:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_base.PNG?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/05/Controller/"/>
+
+
+
+
+
+  <title>继电器-->Pico控制器-->可编程控制器PLC | Barret's Notes!</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Barret's Notes!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个勤奋程序员的总结。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/Controller/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Barret Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Barret's Notes!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">继电器-->Pico控制器-->可编程控制器PLC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T12:35:45+08:00">
+                2017-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/source/categories/Product/" itemprop="url" rel="index">
+                    <span itemprop="name">Product</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/05/Controller/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/05/Controller/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h1><p>  继电器（英文名称：relay）是一种电控制器件，是当输入量（激励量）的变化达到规定要求时，在电气输出电路中使被控量发生预定的阶跃变化的一种电器。<br>  它具有控制系统（又称输入回路）和被控制系统（又称输出回路）之间的互动关系。<br>  通常应用于自动化的控制电路中，它实际上是用小电流去控制大电流运作的一种自动开关。故在电路中起着自动调节、安全保护、转换电路等作用。     </p>
+<h1 id="Pico控制器"><a href="#Pico控制器" class="headerlink" title="Pico控制器"></a>Pico控制器</h1><p>  Pico是一种紧凑、友好、廉价的控制器，提供简单的逻辑、定时、计数和实时时钟操作。<br>  为增强性能，Pico GFX增加了图形画面的使用,提供高级编程特征:如PID控制,高速计数器，以及位序列。<br>  Pico是替代继电器应用的理想选择，适合于简单控制应用，如楼宇、暖通空调、停车场照明以及一些对成本要求很严的场合。<br>  Pico控制器所有的编程和数据调整都能够通过面板上的键盘和显示来完成，或者利用Allen-Bradley的PicoSoft和PicoSoft Pro配置软件来完成。     </p>
+<h1 id="可编程控制器PLC"><a href="#可编程控制器PLC" class="headerlink" title="可编程控制器PLC"></a>可编程控制器PLC</h1><p>  可编程控制器（Programmable Logic Controller）简称PLC，是一种通用的工业控制装置，其组成与一般的微机系统基本相似。<br>  它采用可以编制程序的存储器，用来在执行存储逻辑运算和顺序控制、定时、计数和算术运算等操作的指令，并通过数字或模拟的输入(I)和输出(O)接口，控制各种类型的机械设备或生产过程。PLC基本组成如下图所示：<br>  <img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_base.PNG?raw=true" alt=""><br>  可编程控制器是在电器控制技术和计算机技术的基础上开发出来的，并逐渐发展成为以微处理器为核心，把自动化技术、计算机技术、通讯技术融为一体的新型工业控制装置。PLC工作过程如下图所示：<br>  <img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/PLC_Work.PNG?raw=true" alt=""><br>  目前，PLC已被广泛应用于各种生产机械和生产过程的自动控制中，成为一种最重要、最普及、应用场合最多的工业控制装置，被公认为现代工业自动化的三大支柱（PLC、机器人、CAD/CAM）之一。    </p>
+<h1 id="Rockwell系列PLC"><a href="#Rockwell系列PLC" class="headerlink" title="Rockwell系列PLC"></a>Rockwell系列PLC</h1><h2 id="Logix系统控制器类型"><a href="#Logix系统控制器类型" class="headerlink" title="Logix系统控制器类型"></a>Logix系统控制器类型</h2><ul>
+<li>ControlLogix控制器            </li>
+<li>CompactLogix控制器              </li>
+<li>FlexLogix控制器            </li>
+<li>SoftLogix控制器          </li>
+<li>DriveLogix控制器                </li>
+</ul>
+<h2 id="Logix系统常见硬件类型"><a href="#Logix系统常见硬件类型" class="headerlink" title="Logix系统常见硬件类型"></a>Logix系统常见硬件类型</h2><ul>
+<li>机架<br>（1）1756-A4/B、1756-A7/B、1756-A10/B、1756-A13/B、1756-A17/B<br>（2）4槽、7槽、10槽、13槽、17槽机架        </li>
+<li>电源模块<br>（1）非冗余（1756-PA72，1756-PB72，1756-PA75，1756-PB75）<br>冗余（1756-PA75R，1756- PB75R）<br>（2）1756-PA72 电源（220VAC/5VDC 10A）<br>   1756-PA75 电源（220VAC/5VDC 13A）<br>   1756-PB72 电源（24VDC/5VDC 10A）<br>   1756-PB75 电源（24VDC/5VDC 13A）         </li>
+<li>CPU模块<br>（1）1756-L55系列，1756-L55M12、1756-L55M16、1756-L55M22、1756-L55M24<br>（2）1756-L6x系列，1756-L61、1756-L62、1756-L63、1756-L65<br>（3）1756-L7x系列，1756-L71、1756-L72、1756-L73、1756-L75               </li>
+<li>通讯模块<br>EtherNet通讯模块，1756-ENBT、1756-EN2T、1756-EN2TR<br>ControlNet通讯模块，1756-CNB、1756-CNBR、1756-CN2、1756-CN2R<br>DeviceNet通讯模块，1756-DNB             </li>
+<li>DI模块<br>（1）1756-IB16，1756-IB32（12/24V DC）<br>（2）1756-IM16I（220V AC）                 </li>
+<li>DO模块<br>（1）1756-OB8、1756-OB16、1756-OB32（12/24V DC）</li>
+<li>AI模块<br>常规，1756-IF8、1756-IF16<br>热电阻模块，1756-IR6I<br>热电偶模块，1756-IT6I              </li>
+<li>AO模块<br>（1）1756-OF4、1756-OF8、1756-IF4FXOF2F              </li>
+<li>其他<br>（1）1756-HSC，高速计数器模块</li>
+</ul>
+<h2 id="ControlLogix硬件特性"><a href="#ControlLogix硬件特性" class="headerlink" title="ControlLogix硬件特性"></a>ControlLogix硬件特性</h2><ul>
+<li>框架：      1756-A7/B（本地7槽机架）、1756-A10/B（远程10槽机架）          </li>
+<li>控制器型号：1756-L<em>**</em>                       </li>
+<li>电源模块：    1756-PA72/C，120/240VAC，50/60Hz                 </li>
+<li>通讯模块：  1756-ENBT，1756-CN2R,1756-CNBR,1756-DNB          </li>
+<li>I/O模块：<br>1756-IR6I，    6通道，热电阻模块<br>1756-IF8，        8通道，模拟量输入模块<br>1756-OF8，    8通道，模拟量输出模块<br>1756-IT6I，        6通道，热电偶模块<br>1756-IB16，    16点，数字量输入模块（DC24V）<br>1756-OB16E，  16点，数字量输出模块（DC24V）<br><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/AIO.PNG?raw=true" alt=""><br><img src="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/DIO.PNG?raw=true" alt="">    </li>
+<li>通讯方式：RS232/DH-485串口通讯、EtherNet网络通讯         </li>
+<li>DC24V电源：AB-1606-XL          </li>
+<li>其他：1756-HSC 高速计数 1756-PLS 限位控制 </li>
+<li>系统设计目标：将多种控制方式集成在单一的控制器上，集成了顺序控制、运动控制、传动控制、过程控制。      </li>
+</ul>
+<h2 id="CompactLogix硬件特性"><a href="#CompactLogix硬件特性" class="headerlink" title="CompactLogix硬件特性"></a>CompactLogix硬件特性</h2><ul>
+<li>框架：        无</li>
+<li>处理器：        1769-L<em>*</em>    </li>
+<li>电源模块：    1769-PA4，120/240VAC，50/60Hz     </li>
+<li>通讯模块：  1769-SDN，DeviceNet网络适配器     </li>
+<li>I/O模块：<br>1769-IF8，      8通道，模拟量输入模块<br>1769-IQ16，    16点，数字量输入模块（DC24V）<br>1769-OF4CI，   4通道，模拟量输出模块<br>1769-OB16，     16点，数字量输出模块（DC24V）              </li>
+<li>通讯方式：RS232/DH-485串口通信、EtherNet网络通讯</li>
+<li>DC24V电源：AB-1606-XL</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/Controller/" rel="tag"># Controller</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/goal/" rel="next" title="知识积累规划">
+                <i class="fa fa-chevron-left"></i> 知识积累规划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/05/DesignPattern/" rel="prev" title="设计模式(Design Pattern)">
+                设计模式(Design Pattern) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/timg.jpg"
+               alt="Barret Xiong" />
+          <p class="site-author-name" itemprop="name">Barret Xiong</p>
+           
+              <p class="site-description motion-element" itemprop="description">Be Excellent, Never Give in!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiong-ang/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:xiong.ang@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#继电器"><span class="nav-number">1.</span> <span class="nav-text">继电器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pico控制器"><span class="nav-number">2.</span> <span class="nav-text">Pico控制器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可编程控制器PLC"><span class="nav-number">3.</span> <span class="nav-text">可编程控制器PLC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rockwell系列PLC"><span class="nav-number">4.</span> <span class="nav-text">Rockwell系列PLC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logix系统控制器类型"><span class="nav-number">4.1.</span> <span class="nav-text">Logix系统控制器类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logix系统常见硬件类型"><span class="nav-number">4.2.</span> <span class="nav-text">Logix系统常见硬件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ControlLogix硬件特性"><span class="nav-number">4.3.</span> <span class="nav-text">ControlLogix硬件特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CompactLogix硬件特性"><span class="nav-number">4.4.</span> <span class="nav-text">CompactLogix硬件特性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Barret Xiong</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://评论.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/05/Controller/';
+          this.page.identifier = '2017/11/05/Controller/';
+          this.page.title = '继电器-->Pico控制器-->可编程控制器PLC';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://评论.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
