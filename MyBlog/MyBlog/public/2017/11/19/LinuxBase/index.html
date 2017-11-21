@@ -103,7 +103,7 @@
 <meta property="og:description" content="Linux初步介绍 特点：免费/开源、支持多用户、安全           linux最小内存需要4M          基本命令 关机: shutdown -h now          重启: shutdown -r now          重启: reboot                   进入图形界面: startx            用户注销: logout">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/FileSystem.png?raw=true">
-<meta property="og:updated_time" content="2017-11-19T05:03:50.767Z">
+<meta property="og:updated_time" content="2017-11-21T11:48:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux基础">
 <meta name="twitter:description" content="Linux初步介绍 特点：免费/开源、支持多用户、安全           linux最小内存需要4M          基本命令 关机: shutdown -h now          重启: shutdown -r now          重启: reboot                   进入图形界面: startx            用户注销: logout">
@@ -403,6 +403,8 @@
 <li>搜索文件及目录: find                </li>
 <li>重定向: &gt;覆盖写；&gt;&gt;末尾添加；&lt;反向传          </li>
 <li>查看文件: cat                 </li>
+<li>查看历史命令: history n              </li>
+<li>执行历史命令: !n</li>
 </ol>
 <h1 id="vi编辑器"><a href="#vi编辑器" class="headerlink" title="vi编辑器"></a>vi编辑器</h1><ol>
 <li>创建文件: vi  文件名          </li>
@@ -446,7 +448,8 @@
 <li>安装压缩文件: tar -zxvf *.tar.gz             </li>
 <li>硬盘分区: 1.主分区（系统所在分区）、扩展分区（不能直接使用，可分成若干个逻辑分区）；2.一块硬盘上，主分区和扩展分区总数不超过4个；3.Windows分区标识与目录对应，Linux硬盘分区与目录结构对应不明确，各分区都是挂载在目录树上；4.查看Linux分区情况：fdisk -l；5.查看目录挂载的分区: df 目录；6.查看磁盘使用情况: df -h                        </li>
 <li>Linux安装: 1.分区：/boot分区 100M；swap交换分区 一般是物理内存的两倍，不要大于256M；/根分区 尽可能大；2.swap相当于扩展内存，在系统的物理内存不够用的时候，该空间供当前运行的程序使用                                </li>
-<li>Linux Shell:1.查看当前使用的shell:env;2.修改shell:chsh -s 新的shell如/bin/csh                </li>
+<li>Linux Shell:1.查看当前使用的shell:env;2.修改shell:chsh -s 新的shell如/bin/csh           </li>
+<li>安装.deb文件: dpkg -i 安装包名字     </li>
 </ol>
 
       

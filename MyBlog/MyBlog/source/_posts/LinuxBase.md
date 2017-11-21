@@ -32,6 +32,8 @@ categories: Linux
 21. 搜索文件及目录: find                
 22. 重定向: >覆盖写；>>末尾添加；<反向传          
 23. 查看文件: cat                 
+24. 查看历史命令: history n              
+25. 执行历史命令: !n
 
 # vi编辑器                              
 1. 创建文件: vi  文件名          
@@ -76,4 +78,5 @@ categories: Linux
 4. 安装压缩文件: tar -zxvf *.tar.gz             
 5. 硬盘分区: 1.主分区（系统所在分区）、扩展分区（不能直接使用，可分成若干个逻辑分区）；2.一块硬盘上，主分区和扩展分区总数不超过4个；3.Windows分区标识与目录对应，Linux硬盘分区与目录结构对应不明确，各分区都是挂载在目录树上；4.查看Linux分区情况：fdisk -l；5.查看目录挂载的分区: df 目录；6.查看磁盘使用情况: df -h                        
 5. Linux安装: 1.分区：/boot分区 100M；swap交换分区 一般是物理内存的两倍，不要大于256M；/根分区 尽可能大；2.swap相当于扩展内存，在系统的物理内存不够用的时候，该空间供当前运行的程序使用                                
-6. Linux Shell:1.查看当前使用的shell:env;2.修改shell:chsh -s 新的shell如/bin/csh                
+6. Linux Shell:1.查看当前使用的shell:env;2.修改shell:chsh -s 新的shell如/bin/csh           
+7. 安装.deb文件: dpkg -i 安装包名字     
