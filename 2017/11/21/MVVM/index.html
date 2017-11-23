@@ -103,7 +103,7 @@
 <meta property="og:description" content="MVVM设计模式 MVVM是Model、View、ViewModel的简写，这种模式的引入就是使用ViewModel来降低View和Model的耦合，说是降低View和Model的耦合。也可以说是是降低界面和逻辑的耦合，理想情况下界面和逻辑是完全分离的，单方面更改界面时不需要对逻辑代码改动，同样的逻辑代码更改时也不需要更改界面。同一个Model可以使用完全不用的View进行展示，同一个View也可">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/MVVM.png?raw=true">
-<meta property="og:updated_time" content="2017-11-23T11:47:30.000Z">
+<meta property="og:updated_time" content="2017-11-23T11:51:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WPF使用MVVM模式">
 <meta name="twitter:description" content="MVVM设计模式 MVVM是Model、View、ViewModel的简写，这种模式的引入就是使用ViewModel来降低View和Model的耦合，说是降低View和Model的耦合。也可以说是是降低界面和逻辑的耦合，理想情况下界面和逻辑是完全分离的，单方面更改界面时不需要对逻辑代码改动，同样的逻辑代码更改时也不需要更改界面。同一个Model可以使用完全不用的View进行展示，同一个View也可">
@@ -419,40 +419,40 @@ tbShowMessage.SetBinding(TextBlock.TextProperty, binding);//添加到目标属�
 <p>View由依赖属性实现属性改变通知的传递，但要注意传递属性改变的时间，比如TextBox在响应TextChanged事件时，还没有传递，而响应LostFocus时，已经传递                      </p>
 </blockquote>
 <h2 id="ViewModel–-gt-View"><a href="#ViewModel–-gt-View" class="headerlink" title="ViewModel–&gt;View"></a>ViewModel–&gt;View</h2><blockquote>
-<p>ViewModel为了通知View数据的变化，必须借助INotifyPropertyChanged接口。                 </p>
+<p>ViewModel为了通知View数据的变化，必须借助INotifyPropertyChanged接口。                   </p>
+</blockquote>
 <ul>
-<li>一般思路                     <pre><code>class NotificationObject:INotifyPropertyChanged
+<li>一般思路                 </li>
+</ul>
+<pre><code>class NotificationObject:INotifyPropertyChanged
 {
-  public event PropertyChangedEventHandler PropertyChanged;
-  public void RaisePropertyChanged(string propertyName)
-  {
-      if (null != PropertyChanged)
-      {
-          PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-      }
-  }
+    public event PropertyChangedEventHandler PropertyChanged;
+    public void RaisePropertyChanged(string propertyName)
+    {
+        if (null != PropertyChanged)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }
 class ViewModel:NotificationObject
 {
-  private int _Age;
-  public int Age
-  {
-      get { return _Age; }
-      set
-      {
-          if(_Age != value) //防止通知死循环
-          {
-              _Age = value;
-              RaisePropertyChanged(&quot;Age&quot;); 
-          }
-      }
-  }
-  ...
+    private int _Age;
+    public int Age
+    {
+        get { return _Age; }
+        set
+        {
+            if(_Age != value) //防止通知死循环
+            {
+                _Age = value;
+                RaisePropertyChanged(&quot;Age&quot;); 
+            }
+        }
+    }
+    ...
 }
-</code></pre></li>
-</ul>
-</blockquote>
-<h1 id="命令绑定与事件绑定"><a href="#命令绑定与事件绑定" class="headerlink" title="命令绑定与事件绑定"></a>命令绑定与事件绑定</h1><h2 id="命令绑定"><a href="#命令绑定" class="headerlink" title="命令绑定"></a>命令绑定</h2><pre><code>class DelegateCommand:ICommand
+</code></pre><h1 id="命令绑定与事件绑定"><a href="#命令绑定与事件绑定" class="headerlink" title="命令绑定与事件绑定"></a>命令绑定与事件绑定</h1><h2 id="命令绑定"><a href="#命令绑定" class="headerlink" title="命令绑定"></a>命令绑定</h2><pre><code>class DelegateCommand:ICommand
 {
     public bool CanExecute(object parameter)
     {
@@ -486,15 +486,33 @@ class ViewModel:NotificationObject
 }
 </code></pre><h2 id="事件绑定（两种方式）"><a href="#事件绑定（两种方式）" class="headerlink" title="事件绑定（两种方式）"></a>事件绑定（两种方式）</h2><ol>
 <li>引入reference库<br>Microsoft.Expression.Interactions.dll<br>System.Windows.Interactivity.dll                        </li>
-<li>XAML中加入引用          <pre><code>xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;           
-xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
-</code></pre></li>
-<li>在ViewModel中加入Method和事件<br>```<br>public void Method()<br>{<br> …<br>}</li>
+<li>XAML中加入引用                   </li>
 </ol>
-<p>public DelegateCommond OperCommond{get;set;}</p>
-<pre><code>4. 绑定事件
-</code></pre><p><i:interaction.triggers><br>　　<i:eventtrigger eventname="Loaded"><br>　　　　<i:invokecommandaction command="{Binding OperCommond}" commandparameter="{Binding ElementName=*}"><br>　　</i:invokecommandaction></i:eventtrigger><br>　　<i:eventtrigger eventname="KeyUp"><br>　　　　 <i:eventtrigger eventname="Click"><br>               <ei:callmethodaction targetobject="{Binding}" methodname="Method"><br>        </ei:callmethodaction></i:eventtrigger><br>　　</i:eventtrigger><br></i:interaction.triggers><br>```                                             </p>
-<ol>
+<pre><code>xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;           
+xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+</code></pre><ol>
+<li>在ViewModel中加入Method和事件                        </li>
+</ol>
+<pre><code>public void Method()
+{
+    ...
+}
+
+public DelegateCommond OperCommond{get;set;}
+</code></pre><ol>
+<li>绑定事件                                      </li>
+</ol>
+<pre><code>&lt;i:Interaction.Triggers&gt;
+　　&lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+　　　　&lt;i:InvokeCommandAction Command=&quot;{Binding OperCommond}&quot; CommandParameter=&quot;{Binding ElementName=*}&quot;/&gt;
+　　&lt;/i:EventTrigger&gt;
+　　&lt;i:EventTrigger EventName=&quot;KeyUp&quot;&gt;
+　　　　 &lt;i:EventTrigger EventName=&quot;Click&quot;&gt;
+               &lt;ei:CallMethodAction TargetObject=&quot;{Binding}&quot; MethodName=&quot;Method&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+　　&lt;/i:EventTrigger&gt;
+&lt;/i:Interaction.Triggers&gt;
+</code></pre><ol>
 <li>MVVMLight使用</li>
 </ol>
 <ul>
