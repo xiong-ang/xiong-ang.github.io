@@ -11,7 +11,7 @@ categories: [Design Pattern,C#]
 1. **Model** 负责数据和逻辑的处理，对于Model层，它什么也不知道         
 2. **ViewModel** 将逻辑交由Model处理，并向外暴露数据，它只知道Model          
 3. **View** 显示界面，并将数据变化通知ViewModel，它只知道ViewModel            
-![](www.baidu.com)                
+![](https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/MVVM.png?raw=true)                
 
 # WPF使用MVVM设计模式            
 > 在WPF的MVVM模式中，View和ViewModel之间数据和命令的关联都是通过绑定实现的，绑定后View和ViewModel并不产生直接的依赖。具体就是**View中出现数据变化时会尝试修改绑定的目标**。同样**View执行命令时也会去寻找绑定的Command并执行**。反过来，**ViewModel在Property发生改变时会发个通知说“名字叫XXX的Property改变了，你们这些View中谁绑定了XXX也要跟着变啊!”**，至于有没有View收到是不是做出变化也不关心。ViewModel中的Command脱离View就更简单了，因为Command在执行操作过程中操作数据时，根本不需要操作View中的数据，只需要操作ViewModel中的Property就可以了，Property的变化通过绑定就可以反映到View上。这样在测试Command时也不需要View的参与。            
@@ -35,14 +35,16 @@ tbShowMessage.SetBinding(TextBlock.TextProperty, binding);//添加到目标属�
 //or
 //BindingOperations.SetBinding(tbShowMessage, TextBlock.TextProperty, binding);
 ```                    
-> 对集合添加、删除等操作又需要使用数据绑定时要优先考虑ObservalbeCollection<T>                        
+> 对集合添加、删除等操作又需要使用数据绑定时要优先考虑ObservableCollection<T>                        
 
 ## View-->ViewModel               
 > View由依赖属性实现属性改变通知的传递，但要注意传递属性改变的时间，比如TextBox在响应TextChanged事件时，还没有传递，而响应LostFocus时，已经传递                      
 
 ## ViewModel-->View          
-> ViewModel为了通知View数据的变化，必须借助INotifyPropertyChanged接口。                 
-* 一般思路                     
+> ViewModel为了通知View数据的变化，必须借助INotifyPropertyChanged接口。                   
+
+* 一般思路                 
+
 ```                   
 class NotificationObject:INotifyPropertyChanged
 {
@@ -75,7 +77,8 @@ class ViewModel:NotificationObject
 ```                         
  
 # 命令绑定与事件绑定                       
-## 命令绑定       
+## 命令绑定                    
+
 ```            
 class DelegateCommand:ICommand
 {
@@ -116,12 +119,15 @@ class ViewModel:NotificationObject
 1. 引入reference库               
 Microsoft.Expression.Interactions.dll                   
 System.Windows.Interactivity.dll                        
-2. XAML中加入引用          
+2. XAML中加入引用                   
+
 ```                   
 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"           
 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"             
 ```                        
-3. 在ViewModel中加入Method和事件                
+
+3. 在ViewModel中加入Method和事件                        
+
 ```              
 public void Method()
 {
@@ -129,8 +135,10 @@ public void Method()
 }
 
 public DelegateCommond OperCommond{get;set;}
-```              
-4. 绑定事件                      
+```                             
+
+4. 绑定事件                                      
+
 ```                     
 <i:Interaction.Triggers>
 　　<i:EventTrigger EventName="Loaded">
@@ -142,7 +150,8 @@ public DelegateCommond OperCommond{get;set;}
         </i:EventTrigger>
 　　</i:EventTrigger>
 </i:Interaction.Triggers>
-```                                             
+```                                
+                            
 5. MVVMLight使用
 * ViewModelBase提供ViewModel的基类                           
 * RelayCommand和RelayCommand<T>实现命令机制                  
