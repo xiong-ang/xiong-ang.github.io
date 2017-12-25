@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Barret&#39;s Notes!">
 <meta property="og:description" content="安装Docker 安装Docker                      apt-get install docker.io  查询和启动服务                             service docker.io status service docker.io start  创建软连接                        ln -sf /usr/bin/doc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-25T06:24:21.000Z">
+<meta property="og:updated_time" content="2017-12-25T06:33:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker使用（Some Problems in Using Docker）">
 <meta name="twitter:description" content="安装Docker 安装Docker                      apt-get install docker.io  查询和启动服务                             service docker.io status service docker.io start  创建软连接                        ln -sf /usr/bin/doc">
@@ -432,18 +432,27 @@ Ctrl+D 或 Exit
 docker commit d48b21a7e439 tomcat_new
 </code></pre><h2 id="Ubuntu镜像apt-get-update-fail问题"><a href="#Ubuntu镜像apt-get-update-fail问题" class="headerlink" title="Ubuntu镜像apt-get update fail问题"></a>Ubuntu镜像apt-get update fail问题</h2><ul>
 <li><strong>根源:</strong> Docker dns server 设置问题                                 </li>
-<li><strong>解决:</strong><br>```                <h1 id="Get-dns-server"><a href="#Get-dns-server" class="headerlink" title="Get dns server"></a>Get dns server</h1>nmcli dev show |grep “IP4.DNS”</li>
+<li><strong>解决:</strong>               </li>
 </ul>
-<h1 id="Edit-etc-default-docker-and-add-the-following-line"><a href="#Edit-etc-default-docker-and-add-the-following-line" class="headerlink" title="Edit /etc/default/docker and add the following line"></a>Edit /etc/default/docker and add the following line</h1><p>DOCKER_OPTS=”–dns <your_dns_server_1> –dns <your_dns_server_2>“</your_dns_server_2></your_dns_server_1></p>
-<h1 id="Restart-docker-sevice"><a href="#Restart-docker-sevice" class="headerlink" title="Restart docker sevice"></a>Restart docker sevice</h1><p>sudo service docker restart</p>
-<pre><code>
-## Docker制作镜像
-</code></pre><h1 id="得到配置好的images-ID"><a href="#得到配置好的images-ID" class="headerlink" title="得到配置好的images ID"></a>得到配置好的images ID</h1><p>docker ps -a  -&gt;得到配置好的images ID</p>
-<h1 id="提交镜像"><a href="#提交镜像" class="headerlink" title="提交镜像"></a>提交镜像</h1><p>docker commit image_ID new_image_name</p>
-<pre><code>## Docker 运行Django                    
-* **根源:** Docker只能守护一个进程，如果在Docker里写脚本，脚本执行结束时，Docker守护进程也结束，所以不适合在docker容器里写脚本运行Django server                 
-* **解决:**
-</code></pre><h1 id="让Docker守护进程守护Django-Server进程"><a href="#让Docker守护进程守护Django-Server进程" class="headerlink" title="让Docker守护进程守护Django Server进程"></a>让Docker守护进程守护Django Server进程</h1><p>docker run -d -p 8080:8000 ubuntu/django /usr/bin/python3 /home/firstproject/manage.py runserver 0.0.0.0:8000<br>```                    </p>
+<pre><code># Get dns server
+nmcli dev show |grep &quot;IP4.DNS&quot;
+
+# Edit /etc/default/docker and add the following line
+DOCKER_OPTS=&quot;--dns &lt;your_dns_server_1&gt; --dns &lt;your_dns_server_2&gt;&quot;
+
+# Restart docker sevice
+sudo service docker restart
+</code></pre><h2 id="Docker制作镜像"><a href="#Docker制作镜像" class="headerlink" title="Docker制作镜像"></a>Docker制作镜像</h2><pre><code># 得到配置好的images ID
+docker ps -a  -&gt;得到配置好的images ID
+
+# 提交镜像
+docker commit image_ID new_image_name
+</code></pre><h2 id="Docker-运行Django"><a href="#Docker-运行Django" class="headerlink" title="Docker 运行Django"></a>Docker 运行Django</h2><ul>
+<li><strong>根源:</strong> Docker只能守护一个进程，如果在Docker里写脚本，脚本执行结束时，Docker守护进程也结束，所以不适合在docker容器里写脚本运行Django server                 </li>
+<li><strong>解决:</strong>                       <pre><code># 让Docker守护进程守护Django Server进程
+docker run -d -p 8080:8000 ubuntu/django /usr/bin/python3 /home/firstproject/manage.py runserver 0.0.0.0:8000
+</code></pre></li>
+</ul>
 
       
     </div>
@@ -643,7 +652,7 @@ docker commit d48b21a7e439 tomcat_new
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker"><span class="nav-number">1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新Docker到最新版本"><span class="nav-number">2.</span> <span class="nav-text">更新Docker到最新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">3.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu镜像apt-get-update-fail问题"><span class="nav-number">4.</span> <span class="nav-text">Ubuntu镜像apt-get update fail问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Get-dns-server"><span class="nav-number"></span> <span class="nav-text">Get dns server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Edit-etc-default-docker-and-add-the-following-line"><span class="nav-number"></span> <span class="nav-text">Edit /etc/default/docker and add the following line</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Restart-docker-sevice"><span class="nav-number"></span> <span class="nav-text">Restart docker sevice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#得到配置好的images-ID"><span class="nav-number"></span> <span class="nav-text">得到配置好的images ID</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交镜像"><span class="nav-number"></span> <span class="nav-text">提交镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让Docker守护进程守护Django-Server进程"><span class="nav-number"></span> <span class="nav-text">让Docker守护进程守护Django Server进程</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker"><span class="nav-number">1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新Docker到最新版本"><span class="nav-number">2.</span> <span class="nav-text">更新Docker到最新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">3.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu镜像apt-get-update-fail问题"><span class="nav-number">4.</span> <span class="nav-text">Ubuntu镜像apt-get update fail问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker制作镜像"><span class="nav-number">5.</span> <span class="nav-text">Docker制作镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-运行Django"><span class="nav-number">6.</span> <span class="nav-text">Docker 运行Django</span></a></li></ol></div>
             
 
           </div>
