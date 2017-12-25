@@ -103,7 +103,7 @@
 <meta property="og:description" content="MVVM设计模式 MVVM是Model、View、ViewModel的简写，这种模式的引入就是使用ViewModel来降低View和Model的耦合，说是降低View和Model的耦合。也可以说是是降低界面和逻辑的耦合，理想情况下界面和逻辑是完全分离的，单方面更改界面时不需要对逻辑代码改动，同样的逻辑代码更改时也不需要更改界面。同一个Model可以使用完全不用的View进行展示，同一个View也可">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/xiong-ang/xiong-ang.github.io/blob/Hexo/MyBlog/MyBlog/images/MVVM.png?raw=true">
-<meta property="og:updated_time" content="2017-12-03T08:26:58.000Z">
+<meta property="og:updated_time" content="2017-12-25T06:04:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WPF使用MVVM模式">
 <meta name="twitter:description" content="MVVM设计模式 MVVM是Model、View、ViewModel的简写，这种模式的引入就是使用ViewModel来降低View和Model的耦合，说是降低View和Model的耦合。也可以说是是降低界面和逻辑的耦合，理想情况下界面和逻辑是完全分离的，单方面更改界面时不需要对逻辑代码改动，同样的逻辑代码更改时也不需要更改界面。同一个Model可以使用完全不用的View进行展示，同一个View也可">
@@ -474,11 +474,11 @@ class ViewModel:NotificationObject
     public ViewModel()
     {
         ...
-        OperCommond = new DelegateCommond();
-        OperCommond.ExecuteAction += Oper;
+        OperCommand = new DelegateCommand();
+        OperCommand.ExecuteAction += Oper;
     }
     ...
-    public DelegateCommond OperCommond{get;set;}
+    public DelegateCommand OperCommand{get;set;}
     private void Oper(object parameter)
     {
         ...
@@ -498,13 +498,13 @@ xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
     ...
 }
 
-public DelegateCommond OperCommond{get;set;}
+public DelegateCommand OperCommand{get;set;}
 </code></pre><ol>
 <li>绑定事件                                      </li>
 </ol>
 <pre><code>&lt;i:Interaction.Triggers&gt;
 　　&lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
-　　　　&lt;i:InvokeCommandAction Command=&quot;{Binding OperCommond}&quot; CommandParameter=&quot;{Binding ElementName=*}&quot;/&gt;
+　　　　&lt;i:InvokeCommandAction Command=&quot;{Binding OperCommand}&quot; CommandParameter=&quot;{Binding ElementName=*}&quot;/&gt;
 　　&lt;/i:EventTrigger&gt;
 　　&lt;i:EventTrigger EventName=&quot;KeyUp&quot;&gt;
 　　　　 &lt;i:EventTrigger EventName=&quot;Click&quot;&gt;
@@ -564,6 +564,10 @@ public DelegateCommond OperCommond{get;set;}
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/webserverproblem/" rel="prev" title="Web服务器配置问题 (Some Problems in Web Server Configuration)">
+                Web服务器配置问题 (Some Problems in Web Server Configuration) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -647,7 +651,7 @@ public DelegateCommond OperCommond{get;set;}
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -658,7 +662,7 @@ public DelegateCommond OperCommond{get;set;}
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -669,7 +673,7 @@ public DelegateCommond OperCommond{get;set;}
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
