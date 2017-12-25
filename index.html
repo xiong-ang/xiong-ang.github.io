@@ -378,7 +378,12 @@
         
           
           安装Docker
-安装Docker                     12345678910apt-get install docker.io```       2. 查询和启动服务                            ```                 service 
+安装Docker                     
+apt-get install docker.io
+
+查询和启动服务                            
+service docker.io status
+service docker.io start
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -538,10 +543,10 @@
         
           
           Apache
-监听端口   1234# 修改\conf\httpd.confListen *:8888```        2. 让外网可访问
+监听端口   12345# 修改\conf\httpd.confListen *:8888```                     2. 让外网可访问
 
 
-修改\conf\httpd.conf将最后一个deny from all修改成allow from all    options followsymli
+修改\conf\httpd.conf将最后一个deny from all修改成allow from all    optio
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1037,7 +1042,10 @@ linux最小内存需要4M
       
         
           
-          python虚拟环境建立123456789101112# Windows:                 &lt;建立&gt;python -m venv 环境名          &lt;进入&gt;../Scripts/activate.bat             &lt;退出&gt;de
+          python虚拟环境建立# Windows:                 
+&lt;建立&gt;python -m venv 环境名          
+&lt;进入&gt;../Scripts/activate.bat             
+&lt;退出&gt;deactivate    
           ...
           <!--noindex-->
           <div class="post-button text-center">

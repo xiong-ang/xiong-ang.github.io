@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="python虚拟环境建立123456789101112# Windows:                 &amp;lt;建立&amp;gt;python -m venv 环境名          &amp;lt;进入&amp;gt;../Scripts/activate.bat             &amp;lt;退出&amp;gt;deactivate        # Ubuntu14:             &amp;lt;建立&amp;gt;">
+<meta name="description" content="python虚拟环境建立# Windows:                  &amp;lt;建立&amp;gt;python -m venv 环境名           &amp;lt;进入&amp;gt;../Scripts/activate.bat              &amp;lt;退出&amp;gt;deactivate          # Ubuntu14:              &amp;lt;建立&amp;gt;python3 -">
 <meta name="keywords" content="Python,Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django使用(Some Problems in Using Django)">
 <meta property="og:url" content="http://yoursite.com/2017/11/13/StrongName/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="python虚拟环境建立123456789101112# Windows:                 &amp;lt;建立&amp;gt;python -m venv 环境名          &amp;lt;进入&amp;gt;../Scripts/activate.bat             &amp;lt;退出&amp;gt;deactivate        # Ubuntu14:             &amp;lt;建立&amp;gt;">
+<meta property="og:description" content="python虚拟环境建立# Windows:                  &amp;lt;建立&amp;gt;python -m venv 环境名           &amp;lt;进入&amp;gt;../Scripts/activate.bat              &amp;lt;退出&amp;gt;deactivate          # Ubuntu14:              &amp;lt;建立&amp;gt;python3 -">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-25T06:01:24.000Z">
+<meta property="og:updated_time" content="2017-12-25T06:18:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django使用(Some Problems in Using Django)">
-<meta name="twitter:description" content="python虚拟环境建立123456789101112# Windows:                 &amp;lt;建立&amp;gt;python -m venv 环境名          &amp;lt;进入&amp;gt;../Scripts/activate.bat             &amp;lt;退出&amp;gt;deactivate        # Ubuntu14:             &amp;lt;建立&amp;gt;">
+<meta name="twitter:description" content="python虚拟环境建立# Windows:                  &amp;lt;建立&amp;gt;python -m venv 环境名           &amp;lt;进入&amp;gt;../Scripts/activate.bat              &amp;lt;退出&amp;gt;deactivate          # Ubuntu14:              &amp;lt;建立&amp;gt;python3 -">
 
 
 
@@ -373,16 +373,89 @@
       
 
       
-        <h2 id="python虚拟环境建立"><a href="#python虚拟环境建立" class="headerlink" title="python虚拟环境建立"></a>python虚拟环境建立</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Windows:                 </div><div class="line">&lt;建立&gt;python -m venv 环境名          </div><div class="line">&lt;进入&gt;../Scripts/activate.bat             </div><div class="line">&lt;退出&gt;deactivate        </div><div class="line"></div><div class="line"># Ubuntu14:             </div><div class="line">&lt;建立&gt;python3 -m venv --without-pip test4             </div><div class="line">&lt;进入&gt;.source test4/bin/activate                   </div><div class="line">&lt;pip&gt;curl https://bootstrap.pypa.io/get-pip.py | python               </div><div class="line">&lt;退出&gt;deactivate                </div><div class="line"></div><div class="line">&lt;查看当前安装python库环境&gt;pip freeze</div></pre></td></tr></table></figure>
-<h2 id="Django基本命令"><a href="#Django基本命令" class="headerlink" title="Django基本命令"></a>Django基本命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;创建工程&gt;django-admin.py startproject project_name                   </div><div class="line">&lt;创建应用&gt;python manage.py startapp app_name              </div><div class="line">&lt;创建更改的文件-数据库&gt;python manage.py makemigrations              </div><div class="line">&lt;将生成的py文件应用到数据库&gt;python manage.py migrate                </div><div class="line">&lt;使用开发服务器&gt;python manage.py runserver (ip:prot)              </div><div class="line">&lt;清空数据库&gt;python manage.py flush              </div><div class="line">&lt;创建超级管理员&gt;python manage.py createsuperuser          </div><div class="line">&lt;修改用户密码&gt;python manage.py changepassword username               </div><div class="line">&lt;Django 项目环境终端&gt;python manage.py shell               </div><div class="line">&lt;数据库命令行&gt;python manage.py dbshell                       </div><div class="line">&lt;验证有无错误&gt;python manage.py validate</div><div class="line">```                  </div><div class="line"></div><div class="line">## Django视图(views.py)                       </div><div class="line">* 视图的两个条件:                       </div><div class="line">1. 第一个参数类型：HttpRequest            </div><div class="line">2. 返回HttpRespense               </div><div class="line">* view&lt;-建立联系-&gt;url：</div></pre></td></tr></table></figure>
-<h1 id="views-py"><a href="#views-py" class="headerlink" title="views.py"></a>views.py</h1><p>from django.http import HttpResponse<br>def hello(request):<br>    return HttpResponse(“Hello Django”)</p>
-<h1 id="urls-py"><a href="#urls-py" class="headerlink" title="urls.py"></a>urls.py</h1><p>from firstapp.views import *<br>urlpatterns = [<br>    path(‘hello/‘, hello),<br>]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Django模板             </div><div class="line">&gt; 模板里面含有逻辑与变量，用于动态生成HTML页面                         </div><div class="line">* 使用Django的最基本方式:</div><div class="line">1. 用原始模板代码字符串创建一个Template对象              </div><div class="line">2. 调用模板对象的render方法，并传入一套变量</div></pre></td></tr></table></figure></p>
-<p>from django import template<br>t=template.Template(“hello,“)<br>c=template.Context({“name”:”Django”})<br>print(t.render(c))<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">* 使用模板步骤：                  </div><div class="line">1. 创建模板HTML文件--一般放在app/templates/目录下                 </div><div class="line">2. 在settings.py中指定模板路径</div></pre></td></tr></table></figure></p>
-<p>import os<br>TEMPALTE_DIRS=os.path.join(os.path.dirname(<strong>file</strong>),’templates’)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">3. 在view.py中返回模板（另一种简单方法）</div></pre></td></tr></table></figure></p>
-<p>from django.shortcut import render_to_response<br>def index(request):<br>    return render_to_response(‘2.html’,{‘name’:’hello’})<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 模型开发与数据库交互                   </div><div class="line">可以在setting.py中配置数据库</div></pre></td></tr></table></figure></p>
-<h1 id="model-py"><a href="#model-py" class="headerlink" title="model.py"></a>model.py</h1><p>from django.db import models<br>class mymodel(models.Model):<br>    …<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">这样的类有一些操作数据库的方法，这相当于django对各种数据库提供了一个facade                             </div><div class="line"></div><div class="line"># Django后台管理                       </div><div class="line">将自定义类型加入后台管理：</div></pre></td></tr></table></figure></p>
-<h1 id="admin-py"><a href="#admin-py" class="headerlink" title="admin.py"></a>admin.py</h1><p>from django.contrib import admin<br>admin.site.register(Myclass)<br>```</p>
+        <h2 id="python虚拟环境建立"><a href="#python虚拟环境建立" class="headerlink" title="python虚拟环境建立"></a>python虚拟环境建立</h2><pre><code># Windows:                 
+&lt;建立&gt;python -m venv 环境名          
+&lt;进入&gt;../Scripts/activate.bat             
+&lt;退出&gt;deactivate        
 
+# Ubuntu14:             
+&lt;建立&gt;python3 -m venv --without-pip test4             
+&lt;进入&gt;.source test4/bin/activate                   
+&lt;pip&gt;curl https://bootstrap.pypa.io/get-pip.py | python               
+&lt;退出&gt;deactivate                
+
+&lt;查看当前安装python库环境&gt;pip freeze
+</code></pre><h2 id="Django基本命令"><a href="#Django基本命令" class="headerlink" title="Django基本命令"></a>Django基本命令</h2><pre><code>&lt;创建工程&gt;django-admin.py startproject project_name                   
+&lt;创建应用&gt;python manage.py startapp app_name              
+&lt;创建更改的文件-数据库&gt;python manage.py makemigrations              
+&lt;将生成的py文件应用到数据库&gt;python manage.py migrate                
+&lt;使用开发服务器&gt;python manage.py runserver (ip:prot)              
+&lt;清空数据库&gt;python manage.py flush              
+&lt;创建超级管理员&gt;python manage.py createsuperuser          
+&lt;修改用户密码&gt;python manage.py changepassword username               
+&lt;Django 项目环境终端&gt;python manage.py shell               
+&lt;数据库命令行&gt;python manage.py dbshell                       
+&lt;验证有无错误&gt;python manage.py validate
+</code></pre><h2 id="Django视图-views-py"><a href="#Django视图-views-py" class="headerlink" title="Django视图(views.py)"></a>Django视图(views.py)</h2><ul>
+<li>视图的两个条件:                       </li>
+</ul>
+<ol>
+<li>第一个参数类型：HttpRequest            </li>
+<li>返回HttpRespense               </li>
+</ol>
+<ul>
+<li>view&lt;-建立联系-&gt;url：                   </li>
+</ul>
+<pre><code># views.py  
+from django.http import HttpResponse
+def hello(request):
+    return HttpResponse(&quot;Hello Django&quot;)
+
+# urls.py
+from firstapp.views import *
+urlpatterns = [
+    path(&apos;hello/&apos;, hello),
+]
+</code></pre><h2 id="Django模板"><a href="#Django模板" class="headerlink" title="Django模板"></a>Django模板</h2><blockquote>
+<p>模板里面含有逻辑与变量，用于动态生成HTML页面                         </p>
+<ul>
+<li>使用Django的最基本方式:                                </li>
+</ul>
+<ol>
+<li>用原始模板代码字符串创建一个Template对象              </li>
+<li>调用模板对象的render方法，并传入一套变量         </li>
+</ol>
+</blockquote>
+<pre><code>from django import template
+t=template.Template(&quot;hello,{{name}}&quot;)
+c=template.Context({&quot;name&quot;:&quot;Django&quot;})
+print(t.render(c))
+</code></pre><ul>
+<li>使用模板步骤：                  </li>
+</ul>
+<ol>
+<li>创建模板HTML文件–一般放在app/templates/目录下                 </li>
+<li><p>在settings.py中指定模板路径                    </p>
+<pre><code>import os
+TEMPALTE_DIRS=os.path.join(os.path.dirname(__file__),&apos;templates&apos;)
+</code></pre></li>
+<li><p>在view.py中返回模板（另一种简单方法）                                      </p>
+<pre><code>from django.shortcut import render_to_response
+def index(request):
+ return render_to_response(&apos;2.html&apos;,{&apos;name&apos;:&apos;hello&apos;})
+</code></pre></li>
+</ol>
+<h1 id="模型开发与数据库交互"><a href="#模型开发与数据库交互" class="headerlink" title="模型开发与数据库交互"></a>模型开发与数据库交互</h1><p>可以在setting.py中配置数据库        </p>
+<pre><code># model.py
+from django.db import models
+class mymodel(models.Model):
+    ...
+</code></pre><p>这样的类有一些操作数据库的方法，这相当于django对各种数据库提供了一个facade                             </p>
+<h1 id="Django后台管理"><a href="#Django后台管理" class="headerlink" title="Django后台管理"></a>Django后台管理</h1><p>将自定义类型加入后台管理：           </p>
+<pre><code># admin.py
+from django.contrib import admin
+admin.site.register(Myclass)
+</code></pre>
       
     </div>
     
@@ -587,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python虚拟环境建立"><span class="nav-number">1.</span> <span class="nav-text">python虚拟环境建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django基本命令"><span class="nav-number">2.</span> <span class="nav-text">Django基本命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#views-py"><span class="nav-number"></span> <span class="nav-text">views.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#urls-py"><span class="nav-number"></span> <span class="nav-text">urls.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model-py"><span class="nav-number"></span> <span class="nav-text">model.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#admin-py"><span class="nav-number"></span> <span class="nav-text">admin.py</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python虚拟环境建立"><span class="nav-number">1.</span> <span class="nav-text">python虚拟环境建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django基本命令"><span class="nav-number">2.</span> <span class="nav-text">Django基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django视图-views-py"><span class="nav-number">3.</span> <span class="nav-text">Django视图(views.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django模板"><span class="nav-number">4.</span> <span class="nav-text">Django模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型开发与数据库交互"><span class="nav-number"></span> <span class="nav-text">模型开发与数据库交互</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django后台管理"><span class="nav-number"></span> <span class="nav-text">Django后台管理</span></a></div>
             
 
           </div>

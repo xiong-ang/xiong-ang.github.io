@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="安装Docker 安装Docker                     12345678910apt-get install docker.io```       2. 查询和启动服务                            ```                 service docker.io statusservice docker.io start```">
+<meta name="description" content="安装Docker 安装Docker                      apt-get install docker.io  查询和启动服务                             service docker.io status service docker.io start  创建软连接                        ln -sf /usr/bin/doc">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker使用（Some Problems in Using Docker）">
 <meta property="og:url" content="http://yoursite.com/2017/12/25/docker/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="安装Docker 安装Docker                     12345678910apt-get install docker.io```       2. 查询和启动服务                            ```                 service docker.io statusservice docker.io start```">
+<meta property="og:description" content="安装Docker 安装Docker                      apt-get install docker.io  查询和启动服务                             service docker.io status service docker.io start  创建软连接                        ln -sf /usr/bin/doc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-25T06:08:49.000Z">
+<meta property="og:updated_time" content="2017-12-25T06:24:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker使用（Some Problems in Using Docker）">
-<meta name="twitter:description" content="安装Docker 安装Docker                     12345678910apt-get install docker.io```       2. 查询和启动服务                            ```                 service docker.io statusservice docker.io start```">
+<meta name="twitter:description" content="安装Docker 安装Docker                      apt-get install docker.io  查询和启动服务                             service docker.io status service docker.io start  创建软连接                        ln -sf /usr/bin/doc">
 
 
 
@@ -374,30 +374,76 @@
 
       
         <h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><ol>
-<li>安装Docker                     <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">apt-get install docker.io</div><div class="line">```       </div><div class="line"></div><div class="line">2. 查询和启动服务                            </div><div class="line">```                 </div><div class="line">service docker.io status</div><div class="line">service docker.io start</div><div class="line">```             </div><div class="line"></div><div class="line">3. 创建软连接</div></pre></td></tr></table></figure>
-</li>
+<li><p>安装Docker                     </p>
+<pre><code>apt-get install docker.io
+</code></pre></li>
+<li><p>查询和启动服务                            </p>
+<pre><code>service docker.io status
+service docker.io start
+</code></pre></li>
+<li><p>创建软连接                       </p>
+<pre><code>ln -sf /usr/bin/docker.io /usr/local/bin/docker
+</code></pre></li>
+<li><p>添加Docker自启动服务                               </p>
+<pre><code>update-rc.d docker.io defaults
+</code></pre></li>
+<li><p>创建Docker组并添加用户                  </p>
+<pre><code>sudo groupadd docker
+sudo gpasswd -a user_name docker
+</code></pre></li>
 </ol>
-<p>ln -sf /usr/bin/docker.io /usr/local/bin/docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">4. 添加Docker自启动服务</div></pre></td></tr></table></figure></p>
-<p>update-rc.d docker.io defaults<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">5. 创建Docker组并添加用户</div></pre></td></tr></table></figure></p>
-<p>sudo groupadd docker<br>sudo gpasswd -a user_name docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 更新Docker到最新版本</div></pre></td></tr></table></figure></p>
-<p>sudo apt-get install apt-transport-https<br>sudo apt-key adv –keyserver hkp://keyserver.ubuntu.com:80 –recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9<br>sudo bash -c “echo deb <a href="https://get.docker.io/ubuntu" target="_blank" rel="external">https://get.docker.io/ubuntu</a> docker main &gt; /etc/apt/sources.list.d/docker.list”<br>sudo apt-get update<br>sudo apt-get install lxc-docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Docker常用命令</div></pre></td></tr></table></figure></p>
-<h1 id="查看所有镜像"><a href="#查看所有镜像" class="headerlink" title="查看所有镜像"></a>查看所有镜像</h1><p>docker images</p>
-<h1 id="正在运行容器"><a href="#正在运行容器" class="headerlink" title="正在运行容器"></a>正在运行容器</h1><p>docker ps</p>
-<h1 id="查看docker容器"><a href="#查看docker容器" class="headerlink" title="查看docker容器"></a>查看docker容器</h1><p>docker ps -a</p>
-<h1 id="启动tomcat-7镜像"><a href="#启动tomcat-7镜像" class="headerlink" title="启动tomcat:7镜像"></a>启动tomcat:7镜像</h1><p>docker run -p 8080:8080 tomcat:7</p>
-<h1 id="以后台守护进程的方式启动"><a href="#以后台守护进程的方式启动" class="headerlink" title="以后台守护进程的方式启动"></a>以后台守护进程的方式启动</h1><p>docker run -d tomcat:7</p>
-<h1 id="停止一个容器"><a href="#停止一个容器" class="headerlink" title="停止一个容器"></a>停止一个容器</h1><p>docker stop b840db1d182b<br>docker kill b840db1d182b</p>
-<h1 id="进入一个容器"><a href="#进入一个容器" class="headerlink" title="进入一个容器"></a>进入一个容器</h1><p>docker attach d48b21a7e439</p>
-<h1 id="进入正在运行容器并以命令行交互"><a href="#进入正在运行容器并以命令行交互" class="headerlink" title="进入正在运行容器并以命令行交互"></a>进入正在运行容器并以命令行交互</h1><p>docker exec -it e9410ee182bd /bin/sh</p>
-<h1 id="以交互的方式运行"><a href="#以交互的方式运行" class="headerlink" title="以交互的方式运行"></a>以交互的方式运行</h1><p>docker run -i -t -p 8081:8080 tomcat:7 /bin/bash</p>
-<h1 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h1><p>Ctrl+D 或 Exit</p>
-<h1 id="根据已有容器制作镜像"><a href="#根据已有容器制作镜像" class="headerlink" title="根据已有容器制作镜像"></a>根据已有容器制作镜像</h1><p>docker commit d48b21a7e439 tomcat_new<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Ubuntu镜像apt-get update fail问题                                      </div><div class="line">* **根源：** Docker dns server 设置问题                                 </div><div class="line">* **解决：**</div></pre></td></tr></table></figure></p>
-<h1 id="Get-dns-server"><a href="#Get-dns-server" class="headerlink" title="Get dns server"></a>Get dns server</h1><p>nmcli dev show |grep “IP4.DNS”</p>
+<h2 id="更新Docker到最新版本"><a href="#更新Docker到最新版本" class="headerlink" title="更新Docker到最新版本"></a>更新Docker到最新版本</h2><pre><code>sudo apt-get install apt-transport-https 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9 
+sudo bash -c &quot;echo deb https://get.docker.io/ubuntu docker main &gt; /etc/apt/sources.list.d/docker.list&quot; 
+sudo apt-get update 
+sudo apt-get install lxc-docker
+</code></pre><h2 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h2><pre><code># 查看所有镜像
+docker images
+
+# 正在运行容器
+docker ps
+
+# 查看docker容器
+docker ps -a
+
+# 启动tomcat:7镜像
+docker run -p 8080:8080 tomcat:7
+
+# 以后台守护进程的方式启动
+docker run -d tomcat:7
+
+# 停止一个容器
+docker stop b840db1d182b
+docker kill b840db1d182b
+
+# 进入一个容器
+docker attach d48b21a7e439
+
+# 进入正在运行容器并以命令行交互
+docker exec -it e9410ee182bd /bin/sh
+
+# 以交互的方式运行
+docker run -i -t -p 8081:8080 tomcat:7 /bin/bash
+
+# 退出容器
+Ctrl+D 或 Exit
+
+# 根据已有容器制作镜像
+docker commit d48b21a7e439 tomcat_new
+</code></pre><h2 id="Ubuntu镜像apt-get-update-fail问题"><a href="#Ubuntu镜像apt-get-update-fail问题" class="headerlink" title="Ubuntu镜像apt-get update fail问题"></a>Ubuntu镜像apt-get update fail问题</h2><ul>
+<li><strong>根源:</strong> Docker dns server 设置问题                                 </li>
+<li><strong>解决:</strong><br>```                <h1 id="Get-dns-server"><a href="#Get-dns-server" class="headerlink" title="Get dns server"></a>Get dns server</h1>nmcli dev show |grep “IP4.DNS”</li>
+</ul>
 <h1 id="Edit-etc-default-docker-and-add-the-following-line"><a href="#Edit-etc-default-docker-and-add-the-following-line" class="headerlink" title="Edit /etc/default/docker and add the following line"></a>Edit /etc/default/docker and add the following line</h1><p>DOCKER_OPTS=”–dns <your_dns_server_1> –dns <your_dns_server_2>“</your_dns_server_2></your_dns_server_1></p>
-<h1 id="Restart-docker-sevice"><a href="#Restart-docker-sevice" class="headerlink" title="Restart docker sevice"></a>Restart docker sevice</h1><p>sudo service docker restart<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Docker制作镜像</div></pre></td></tr></table></figure></p>
-<h1 id="得到配置好的images-ID"><a href="#得到配置好的images-ID" class="headerlink" title="得到配置好的images ID"></a>得到配置好的images ID</h1><p>docker ps -a  -&gt;得到配置好的images ID</p>
-<h1 id="提交镜像"><a href="#提交镜像" class="headerlink" title="提交镜像"></a>提交镜像</h1><p>docker commit image_ID new_image_name<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## Docker 运行Django                    </div><div class="line">* **根源：** Docker只能守护一个进程，如果在Docker里写脚本，脚本执行结束时，Docker守护进程也结束，所以不适合在docker容器里写脚本运行Django server                 </div><div class="line">* **解决：**</div></pre></td></tr></table></figure></p>
-<h1 id="让Docker守护进程守护Django-Server进程"><a href="#让Docker守护进程守护Django-Server进程" class="headerlink" title="让Docker守护进程守护Django Server进程"></a>让Docker守护进程守护Django Server进程</h1><p>docker run -d -p 8080:8000 ubuntu/django /usr/bin/python3 /home/firstproject/manage.py runserver 0.0.0.0:8000<br>```</p>
+<h1 id="Restart-docker-sevice"><a href="#Restart-docker-sevice" class="headerlink" title="Restart docker sevice"></a>Restart docker sevice</h1><p>sudo service docker restart</p>
+<pre><code>
+## Docker制作镜像
+</code></pre><h1 id="得到配置好的images-ID"><a href="#得到配置好的images-ID" class="headerlink" title="得到配置好的images ID"></a>得到配置好的images ID</h1><p>docker ps -a  -&gt;得到配置好的images ID</p>
+<h1 id="提交镜像"><a href="#提交镜像" class="headerlink" title="提交镜像"></a>提交镜像</h1><p>docker commit image_ID new_image_name</p>
+<pre><code>## Docker 运行Django                    
+* **根源:** Docker只能守护一个进程，如果在Docker里写脚本，脚本执行结束时，Docker守护进程也结束，所以不适合在docker容器里写脚本运行Django server                 
+* **解决:**
+</code></pre><h1 id="让Docker守护进程守护Django-Server进程"><a href="#让Docker守护进程守护Django-Server进程" class="headerlink" title="让Docker守护进程守护Django Server进程"></a>让Docker守护进程守护Django Server进程</h1><p>docker run -d -p 8080:8000 ubuntu/django /usr/bin/python3 /home/firstproject/manage.py runserver 0.0.0.0:8000<br>```                    </p>
 
       
     </div>
@@ -597,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker"><span class="nav-number">1.</span> <span class="nav-text">安装Docker</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看所有镜像"><span class="nav-number"></span> <span class="nav-text">查看所有镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正在运行容器"><span class="nav-number"></span> <span class="nav-text">正在运行容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看docker容器"><span class="nav-number"></span> <span class="nav-text">查看docker容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动tomcat-7镜像"><span class="nav-number"></span> <span class="nav-text">启动tomcat:7镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以后台守护进程的方式启动"><span class="nav-number"></span> <span class="nav-text">以后台守护进程的方式启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#停止一个容器"><span class="nav-number"></span> <span class="nav-text">停止一个容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进入一个容器"><span class="nav-number"></span> <span class="nav-text">进入一个容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进入正在运行容器并以命令行交互"><span class="nav-number"></span> <span class="nav-text">进入正在运行容器并以命令行交互</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以交互的方式运行"><span class="nav-number"></span> <span class="nav-text">以交互的方式运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退出容器"><span class="nav-number"></span> <span class="nav-text">退出容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据已有容器制作镜像"><span class="nav-number"></span> <span class="nav-text">根据已有容器制作镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Get-dns-server"><span class="nav-number"></span> <span class="nav-text">Get dns server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Edit-etc-default-docker-and-add-the-following-line"><span class="nav-number"></span> <span class="nav-text">Edit /etc/default/docker and add the following line</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Restart-docker-sevice"><span class="nav-number"></span> <span class="nav-text">Restart docker sevice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#得到配置好的images-ID"><span class="nav-number"></span> <span class="nav-text">得到配置好的images ID</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交镜像"><span class="nav-number"></span> <span class="nav-text">提交镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让Docker守护进程守护Django-Server进程"><span class="nav-number"></span> <span class="nav-text">让Docker守护进程守护Django Server进程</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker"><span class="nav-number">1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新Docker到最新版本"><span class="nav-number">2.</span> <span class="nav-text">更新Docker到最新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">3.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu镜像apt-get-update-fail问题"><span class="nav-number">4.</span> <span class="nav-text">Ubuntu镜像apt-get update fail问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Get-dns-server"><span class="nav-number"></span> <span class="nav-text">Get dns server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Edit-etc-default-docker-and-add-the-following-line"><span class="nav-number"></span> <span class="nav-text">Edit /etc/default/docker and add the following line</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Restart-docker-sevice"><span class="nav-number"></span> <span class="nav-text">Restart docker sevice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#得到配置好的images-ID"><span class="nav-number"></span> <span class="nav-text">得到配置好的images ID</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交镜像"><span class="nav-number"></span> <span class="nav-text">提交镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让Docker守护进程守护Django-Server进程"><span class="nav-number"></span> <span class="nav-text">让Docker守护进程守护Django Server进程</span></a></div>
             
 
           </div>
