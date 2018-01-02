@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="COM,C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="介绍 什么是静态链接呢？即在链接阶段，将源文件中用到的库函数与汇编生成的目标文件合并生成可执行文件。缺点是该可执行文件可能会比较大。好处是方便程序移植。                 静态连接库就是把(lib)文件中用到的函数代码直接链接进目标程序，程序运行的时候不再需要其它的库文件；这与动态链接相对应，动态链接就是把调用的函数所在文件模块（DLL）和调用函数在文件中的位置等信息链接进目标程序，">
+<meta name="keywords" content="COM,C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态与动态链接库(Lib &amp; Dll)">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/Library/index.html">
+<meta property="og:site_name" content="Barret&#39;s Notes!">
+<meta property="og:description" content="介绍 什么是静态链接呢？即在链接阶段，将源文件中用到的库函数与汇编生成的目标文件合并生成可执行文件。缺点是该可执行文件可能会比较大。好处是方便程序移植。                 静态连接库就是把(lib)文件中用到的函数代码直接链接进目标程序，程序运行的时候不再需要其它的库文件；这与动态链接相对应，动态链接就是把调用的函数所在文件模块（DLL）和调用函数在文件中的位置等信息链接进目标程序，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-02T12:50:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="静态与动态链接库(Lib &amp; Dll)">
+<meta name="twitter:description" content="介绍 什么是静态链接呢？即在链接阶段，将源文件中用到的库函数与汇编生成的目标文件合并生成可执行文件。缺点是该可执行文件可能会比较大。好处是方便程序移植。                 静态连接库就是把(lib)文件中用到的函数代码直接链接进目标程序，程序运行的时候不再需要其它的库文件；这与动态链接相对应，动态链接就是把调用的函数所在文件模块（DLL）和调用函数在文件中的位置等信息链接进目标程序，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/Library/"/>
+
+
+
+
+
+  <title>静态与动态链接库(Lib & Dll) | Barret's Notes!</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Barret's Notes!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个勤奋程序员的总结。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/Library/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Barret Xiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Barret's Notes!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">静态与动态链接库(Lib & Dll)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T20:48:40+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/source/categories/COM/" itemprop="url" rel="index">
+                    <span itemprop="name">COM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/02/Library/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/02/Library/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>什么是静态链接呢？即在链接阶段，将源文件中用到的库函数与汇编生成的目标文件合并生成可执行文件。缺点是该可执行文件可能会比较大。好处是方便程序移植。                </p>
+<p>静态连接库就是把(lib)文件中用到的函数代码直接链接进目标程序，程序运行的时候不再需要其它的库文件；这与动态链接相对应，动态链接就是把调用的函数所在文件模块（DLL）和调用函数在文件中的位置等信息链接进目标程序，程序运行的时候再从DLL中寻找相应函数代码，因此需要相应DLL文件的支持。                            </p>
+<p>静态链接库与动态链接库都是共享代码的方式，如果采用静态链接库，则无论你愿不愿意，lib 中的指令都全部被直接包含在最终生成的 EXE 文件中了。但是若使用 DLL，该 DLL 不必被包含在最终 EXE 文件中，EXE 文件执行时可以“动态”地引用和卸载这个与 EXE 独立的 DLL 文件。静态链接库和动态链接库的另外一个区别在于静态链接库中不能再包含其他的动态链接库或者静态库，而在动态链接库中还可以再包含其他的动态或静态链接库。                        </p>
+<p>lib库有两种，一种是包含了函数所在DLL文件和文件中函数位置的信息，称为导出库；一种是包含函数代码本身。一般现有的DLL用的是前一种库           </p>
+</blockquote>
+<ol>
+<li>定义<br>LIB文件中包含函数代码本身，在编译时直接将代码加入程序当中。称为静态链接库static link library。<br>LIB包含了函数所在的DLL文件和文件中函数位置的信息（入口），代码由运行时加载在进程空间中的DLL提供，称为动态链接库dynamic link library。<br>静态链接库包括两个文件：<br>（1）.h头文件，包含静态链接库中说明输出的类或符号原型或数据结构。应用程序调用静态链接库时，需要将该文件包含入应用程序的源文件中。<br>（2）.lib文件，放到固定位置，在应用程序中添加库目录，在附加依赖项中进行添加。<br>动态链接库包括三个文件：<br>（1）.h头文件，包含动态链接库中说明输出的类或符号原型或数据结构的.h文件。应用程序调用动态链接库时，需要将该文件包含入应用程序的源文件中。<br>（2）.lib文件，是动态链接库在编译、链接成功之后生成的文件，作用是当其他应用程序调用.dll时，需要将该文件引入应用程序，否则产生错误。如果不想用.lib文件或者没有.lib文件，可以用WIN32 API函数LoadLibrary、GetProcAddress装载。<br>（3）.dll文件，真正的可执行文件，开发成功后的应用程序在发布时，只需要有.exe文件和.dll文件，并不需要.lib文件和.h头文件。                            </li>
+<li>.lib文件和.dll文件区别<br>（1）.lib是编译时用到的，.dll是运行时用到的。如果要完成源代码的编译，只需要静态链接库；如果要使动态链接的程序运行起来，只需要动态链接库。<br>（2）如果有.dll文件，那么.lib一般是一些索引信息，记录了.dll中函数的入口和位置，.dll中是函数的具体内容；如果只有.lib文件，那么这个.lib文件是静态编译出来的，索引和实现都在其中。使用静态编译的.lib文件，在运行程序时不需要再挂动态库，缺点是导致应用程序比较大，而且失去了动态库的灵活性，发布新版本时要发布新的应用程序才行。<br>（3）动态链接的情况下，有两个文件：一个是.lib文件，一个是.dll文件。.lib包含被.dll导出的函数名称和位置，.dll包含实际的函数和数据，应用程序使用.lib文件链接到.dll文件。在应用程序的可执行文件中，存放的不是被调用的函数代码，而是.dll中相应函数代码的地址，从而节省了内存资源。.dll和.lib文件必须随应用程序一起发行，否则应用程序会产生错误。如果不想用.lib文件或者没有.lib文件，可以用WIN32 API函数LoadLibrary、GetProcAddress装载。                                                                <h2 id="静态链接库"><a href="#静态链接库" class="headerlink" title="静态链接库"></a>静态链接库</h2></li>
+</ol>
+<ul>
+<li><strong>编写</strong>                           </li>
+</ul>
+<ol>
+<li>新建工程<br>New Project –&gt; Visual C++ –&gt; Win32 –&gt; Application type(Static library)                     </li>
+<li>文件内容举例          <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div></pre></td><td class="code"><pre><div class="line">// myMax.h  </div><div class="line">  </div><div class="line">#ifndef MY_MAX_HEADER  </div><div class="line">#define MY_MAX_HEADER  </div><div class="line">  </div><div class="line">int myMax(int x, int y);  </div><div class="line">  </div><div class="line">#endif</div><div class="line"></div><div class="line">//--------------------------------------------------------------</div><div class="line"></div><div class="line">// myMax.cpp  </div><div class="line">  </div><div class="line">#include &quot;myMax.h&quot;  </div><div class="line">  </div><div class="line">int myMax(int x, int y)  </div><div class="line">&#123;  </div><div class="line">    return x &gt; y ? x : y;  </div><div class="line">&#125;</div><div class="line">```              </div><div class="line">* **使用举例**                     </div><div class="line">```                   </div><div class="line">//拷贝头文件myMax.h和库文件Mylib.lib到工程目录下</div><div class="line"></div><div class="line">#include &lt;stdio.h&gt;  </div><div class="line">#include &quot;&lt;path&gt;/myMax.h&quot;  </div><div class="line">  </div><div class="line">#pragma comment(lib, &quot;&lt;path&gt;/Mylib.lib&quot;) //可以在VC编译器中手动设置</div><div class="line">  </div><div class="line">int main()  </div><div class="line">&#123;  </div><div class="line">    int a = 80;  </div><div class="line">    int b = 90;  </div><div class="line">    printf(&quot;%d\n&quot;, myMax(a, b));  </div><div class="line">  </div><div class="line">    return 0;  </div><div class="line">&#125; </div><div class="line">```                  </div><div class="line"></div><div class="line">## 动态链接库                       </div><div class="line"></div><div class="line">* **编写**                           </div><div class="line">1. 新建工程           </div><div class="line">New Project --&gt; Visual C++ --&gt; Win32 --&gt; Application type(DLL)                     </div><div class="line">2. 文件内容举例          </div><div class="line">```              </div><div class="line">// myMax.h  </div><div class="line">  </div><div class="line">#ifndef MY_MAX_HEADER  </div><div class="line">#define MY_MAX_HEADER  </div><div class="line">  </div><div class="line">extern &quot;C&quot; _declspec(dllexport) int myMax(int x, int y);  </div><div class="line">//也可以使用模块定义文件.DEF进行导出</div><div class="line"></div><div class="line">#endif</div><div class="line"></div><div class="line">//--------------------------------------------------------------</div><div class="line"></div><div class="line">// myMax.cpp  </div><div class="line">  </div><div class="line">#include &quot;myMax.h&quot;  </div><div class="line">  </div><div class="line">int myMax(int x, int y)  </div><div class="line">&#123;  </div><div class="line">    return x &gt; y ? x : y;  </div><div class="line">&#125;</div><div class="line">```              </div><div class="line">* **使用举例**                   </div><div class="line">1. 显式链接             </div><div class="line"></div><div class="line">```                   </div><div class="line">//拷贝头文件myMax.h和库文件MyDll.dll到工程目录下</div><div class="line">//修改头文件_declspec(dllexport)为_declspec(dllimport)</div><div class="line"></div><div class="line">#include &lt;stdio.h&gt; </div><div class="line">#include &lt;Windows.h&gt; </div><div class="line">#include &quot;&lt;path&gt;/myMax.h&quot;  </div><div class="line"></div><div class="line">typedef int (*pmyMax)(int, int);  </div><div class="line">int main()  </div><div class="line">&#123;  </div><div class="line">    int a = 80;  </div><div class="line">    int b = 90;  </div><div class="line"></div><div class="line">    //LoadLibrary函数装载DLL</div><div class="line">    HINSTANCE hdll=LoadLibrary(&quot;&lt;path&gt;/MyDll.dll&quot;);</div><div class="line"></div><div class="line">    //GetProcAddress函数获得函数地址</div><div class="line">    pmyMax pfnMax=(pmyMax)GetProcAddress(hdll,&quot;myMax&quot;);</div><div class="line"></div><div class="line">    printf(&quot;%d\n&quot;, myMax(a, b));  </div><div class="line"></div><div class="line">    //FreeLibrary释放DLL</div><div class="line">    FreeLibrary(hdll);</div><div class="line">  </div><div class="line">    return 0;  </div><div class="line">&#125; </div><div class="line">```            </div><div class="line">2. 隐式使用(和静态库一样使用)           </div><div class="line">```            </div><div class="line">//和使用静态库一样，静态库负责动态库的查找</div><div class="line">//拷贝头文件myMax.h和库文件MyDll.dll以及MyDll.lib到工程目录下</div><div class="line">//修改头文件_declspec(dllexport)为_declspec(dllimport)</div><div class="line"></div><div class="line">#include &lt;stdio.h&gt;  </div><div class="line">#include &quot;&lt;path&gt;/myMax.h&quot;  </div><div class="line">  </div><div class="line">#pragma comment(lib, &quot;&lt;path&gt;/MyDll.lib&quot;) //可以在VC编译器中手动设置</div><div class="line">  </div><div class="line">int main()  </div><div class="line">&#123;  </div><div class="line">    int a = 80;  </div><div class="line">    int b = 90;  </div><div class="line">    printf(&quot;%d\n&quot;, myMax(a, b));  </div><div class="line">  </div><div class="line">    return 0;  </div><div class="line">&#125; </div><div class="line">```                </div><div class="line">## 补充                      </div><div class="line">1. DLL 地狱                            </div><div class="line">DLL 地狱（DLL Hell）是指因为系统文件被覆盖而让整个系统像是掉进了地狱。                     </div><div class="line">简单地讲，DLL地狱是指当多个应用程序试图共享一个公用组件时，如某个DLL或某个组件对象模型（COM）类，所引发的一系列问题。      </div><div class="line">2. DLL头文件定义</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>//在DLL导出的头文件*.h</p>
+<p>#ifdef DLL_IMPLEMENT  </p>
+<p>#define DLL_API extern “C” __declspec(dllexport)  </p>
+<p>#else  </p>
+<p>#define DLL_API extern “C” __declspec(dllimport)  </p>
+<p>#endif</p>
+<p>//在导出函数定义的地方</p>
+<p>#define DLL_IMPLEMENT</p>
+<p>#include “*.h” </p>
+<p>//在使用函数的地方使用默认声明</p>
+<p>#include “*.h”</p>
+<pre><code>3. 注意                         
+由于项目中创建的源文件为.CPP文件，即C++源文件，因此Visual C++按C++规范，并采用__cdecl调用约定对其进行编译。这样得到的导出函数就不能被C语言程序所调用。解决该问题的办法是在函数体名称前添加extern “C”修饰，告诉编译器，该函数按照C语言规范，并采用__cdecl调用约定进行编译。因此源文件Add.cpp中的代码可修改如下：
+</code></pre><p>extern “C” int add(int a, int b)<br>{<br>    return a + b;<br>}<br>```<br>最后重新编译该静态链接库项目，导出函数Add就能够被C语言程序所调用了。                      </p>
+<ol>
+<li><a href="https://github.com/xiong-ang/COM_SLN" target="_blank" rel="external">Demo</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/COM/" rel="tag"># COM</a>
+          
+            <a href="/source/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/01/serialize/" rel="next" title="C#序列化(Serialization in C#)">
+                <i class="fa fa-chevron-left"></i> C#序列化(Serialization in C#)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/timg.jpg"
+               alt="Barret Xiong" />
+          <p class="site-author-name" itemprop="name">Barret Xiong</p>
+           
+              <p class="site-description motion-element" itemprop="description">Be Excellent, Never Give in!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiong-ang/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:xiong.ang@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态链接库"><span class="nav-number">2.</span> <span class="nav-text">静态链接库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Barret Xiong</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://评论.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/01/02/Library/';
+          this.page.identifier = '2018/01/02/Library/';
+          this.page.title = '静态与动态链接库(Lib & Dll)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://评论.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
