@@ -94,20 +94,20 @@
 
 
 
-<meta name="description" content="GeoQuiz Android权威指南第三版1-6章练习        Activity生命周期及状态保持onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，除非用户按后退键。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象中。onSaveInstanceState不仅仅处理与设备">
+<meta name="description" content="GeoQuiz Android权威指南第三版1-6章练习                Activity生命周期及状态保持                     onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，除非用户按后退键。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android学习笔记(一)">
 <meta property="og:url" content="http://yoursite.com/2018/01/28/android1/index.html">
 <meta property="og:site_name" content="Barret&#39;s Notes!">
-<meta property="og:description" content="GeoQuiz Android权威指南第三版1-6章练习        Activity生命周期及状态保持onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，除非用户按后退键。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象中。onSaveInstanceState不仅仅处理与设备">
+<meta property="og:description" content="GeoQuiz Android权威指南第三版1-6章练习                Activity生命周期及状态保持                     onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，除非用户按后退键。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/xiong-ang/Android-Practice/blob/master/GeoQuiz/Activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.PNG?raw=true">
 <meta property="og:image" content="https://github.com/xiong-ang/Android-Practice/blob/master/CriminalIntent/RecyclerView.PNG">
-<meta property="og:updated_time" content="2018-01-28T05:33:31.000Z">
+<meta property="og:updated_time" content="2018-01-28T05:49:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记(一)">
-<meta name="twitter:description" content="GeoQuiz Android权威指南第三版1-6章练习        Activity生命周期及状态保持onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，除非用户按后退键。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象中。onSaveInstanceState不仅仅处理与设备">
+<meta name="twitter:description" content="GeoQuiz Android权威指南第三版1-6章练习                Activity生命周期及状态保持                     onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，除非用户按后退键。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象">
 <meta name="twitter:image" content="https://github.com/xiong-ang/Android-Practice/blob/master/GeoQuiz/Activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.PNG?raw=true">
 
 
@@ -377,10 +377,20 @@
 
       
         <h1 id="GeoQuiz"><a href="#GeoQuiz" class="headerlink" title="GeoQuiz"></a>GeoQuiz</h1><blockquote>
-<p>Android权威指南第三版1-6章练习       </p>
-<h2 id="Activity生命周期及状态保持"><a href="#Activity生命周期及状态保持" class="headerlink" title="Activity生命周期及状态保持"></a>Activity生命周期及状态保持</h2><p><img src="https://github.com/xiong-ang/Android-Practice/blob/master/GeoQuiz/Activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.PNG?raw=true" alt=""><br>onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，<strong>除非用户按后退键</strong>。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象中。onSaveInstanceState不仅仅处理与设备旋转相关的问题。用户离开当前activity用户界面或者Android需要回收内存时，activity也会被销毁。<br>onStop()和onSaveInstanceState()是两个可靠的方法，常见的做法是：覆盖onSaveInstanceState()方法，在Bundle对象中，保存当前activity的小的或暂存状态的数据；覆盖onStop()方法，保存永久性数据，如用户编辑的文字等。onStop()方法调用完，activity系统随时会被系统销毁，所以用它保存永久性数据。         </p>
-<h2 id="Activity间数据传递"><a href="#Activity间数据传递" class="headerlink" title="Activity间数据传递"></a>Activity间数据传递</h2><h3 id="启动Activity并传递数据"><a href="#启动Activity并传递数据" class="headerlink" title="启动Activity并传递数据"></a>启动Activity并传递数据</h3><p>启动Activity的请求发送给操作系统的ActivityManager，ActivityManager负责创建Activity实例并调用其onCreate(Bundle)方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">//发送端</div><div class="line">//启动Activity，Intent对象可以附带数据        </div><div class="line">startActivity(Intent intent)</div><div class="line">//or</div><div class="line">startActivityForResult(Intent intent, int requestCode)</div><div class="line"></div><div class="line">//接收端</div><div class="line">//从发送Intent获取数据</div><div class="line">getIntent().get*Extera(*)                   </div><div class="line">```          </div><div class="line"></div><div class="line">### Activity销毁并返回数据           </div><div class="line">``` </div><div class="line">//发送端</div><div class="line">//启动Activity，Intent对象可以附带数据，requestCode记录请求代码</div><div class="line">startActivityForResult(Intent intent, int requestCode)</div><div class="line"></div><div class="line">//接收端</div><div class="line">//设置返回结果，Intent对象可附带返回数据</div><div class="line">setResult(int resultCode)</div><div class="line">//or</div><div class="line">setResult(int resultCode, Intent data)</div><div class="line"></div><div class="line">//发送端</div><div class="line">//在用户退回到发送端时，ActivityManager调用activity方法：</div><div class="line">onActivityResult(int requestCode, int resultCode, Intent data)</div><div class="line">```          </div><div class="line"></div><div class="line"></div><div class="line"># CriminalIntent        </div><div class="line">&gt; Android权威指南第三版7-8章练习             </div><div class="line">## Fragment                 </div><div class="line">&gt; 采用Fragment而不是Activity管理应用UI，可以绕开Android系统Activity使用规则的限制，增加UI设计的灵活性             </div><div class="line">容纳单个Fragment的Activity抽象类：</div></pre></td></tr></table></figure></p>
+<p>Android权威指南第三版1-6章练习              </p>
 </blockquote>
+<h2 id="Activity生命周期及状态保持"><a href="#Activity生命周期及状态保持" class="headerlink" title="Activity生命周期及状态保持"></a>Activity生命周期及状态保持</h2><p><img src="https://github.com/xiong-ang/Android-Practice/blob/master/GeoQuiz/Activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.PNG?raw=true" alt="">                   </p>
+<blockquote>
+<p>onSaveInstanceState(Bundle outState)在onStop()方法之前由系统调用，<strong>除非用户按后退键</strong>。onSaveInstanceState的默认实现要求所有activity将自身状态数据保存在Bundle对象中。onSaveInstanceState不仅仅处理与设备旋转相关的问题。用户离开当前activity用户界面或者Android需要回收内存时，activity也会被销毁。         </p>
+<p>onStop()和onSaveInstanceState()是两个可靠的方法，常见的做法是：覆盖onSaveInstanceState()方法，在Bundle对象中，保存当前activity的小的或暂存状态的数据；覆盖onStop()方法，保存永久性数据，如用户编辑的文字等。onStop()方法调用完，activity系统随时会被系统销毁，所以用它保存永久性数据。          </p>
+</blockquote>
+<h2 id="Activity间数据传递"><a href="#Activity间数据传递" class="headerlink" title="Activity间数据传递"></a>Activity间数据传递</h2><h3 id="启动Activity并传递数据"><a href="#启动Activity并传递数据" class="headerlink" title="启动Activity并传递数据"></a>启动Activity并传递数据</h3><blockquote>
+<p>启动Activity的请求发送给操作系统的ActivityManager，ActivityManager负责创建Activity实例并调用其onCreate(Bundle)方法。     </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//发送端</div><div class="line">//启动Activity，Intent对象可以附带数据        </div><div class="line">startActivity(Intent intent)</div><div class="line">//or</div><div class="line">startActivityForResult(Intent intent, int requestCode)</div><div class="line"></div><div class="line">//接收端</div><div class="line">//从发送Intent获取数据</div><div class="line">getIntent().get*Extera(*)                   </div><div class="line">```              </div><div class="line"></div><div class="line">### Activity销毁并返回数据</div></pre></td></tr></table></figure>
+<p>//发送端<br>//启动Activity，Intent对象可以附带数据，requestCode记录请求代码<br>startActivityForResult(Intent intent, int requestCode)</p>
+<p>//接收端<br>//设置返回结果，Intent对象可附带返回数据<br>setResult(int resultCode)<br>//or<br>setResult(int resultCode, Intent data)</p>
+<p>//发送端<br>//在用户退回到发送端时，ActivityManager调用activity方法：<br>onActivityResult(int requestCode, int resultCode, Intent data)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"># CriminalIntent        </div><div class="line">&gt; Android权威指南第三版7-8章练习             </div><div class="line"></div><div class="line">## Fragment                 </div><div class="line">&gt; 采用Fragment而不是Activity管理应用UI，可以绕开Android系统Activity使用规则的限制，增加UI设计的灵活性             </div><div class="line"></div><div class="line">容纳单个Fragment的Activity抽象类：</div></pre></td></tr></table></figure></p>
 <p>public abstract class SingleFragmentActivity extends AppCompatActivity {</p>
 <pre><code>@Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -399,11 +409,15 @@ protected void onCreate(Bundle savedInstanceState) {
 protected abstract Fragment createFragment();
 </code></pre><p>}<br>```               </p>
 <h2 id="使用RecyclerView显示列表"><a href="#使用RecyclerView显示列表" class="headerlink" title="使用RecyclerView显示列表"></a>使用RecyclerView显示列表</h2><h3 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h3><blockquote>
-<p>RecyclerView的任务仅限于回收和定位屏幕上的View         </p>
-<h3 id="ViewHolder"><a href="#ViewHolder" class="headerlink" title="ViewHolder"></a>ViewHolder</h3><p>容纳View视图               </p>
-<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><p>Adapter负责创建必要的ViewHolder以及绑定ViewHolder至模型层数据    </p>
-<h3 id="各成员关系："><a href="#各成员关系：" class="headerlink" title="各成员关系："></a>各成员关系：</h3><p><img src="https://github.com/xiong-ang/Android-Practice/blob/master/CriminalIntent/RecyclerView.PNG" alt=""></p>
+<p>RecyclerView的任务仅限于回收和定位屏幕上的View          </p>
 </blockquote>
+<h3 id="ViewHolder"><a href="#ViewHolder" class="headerlink" title="ViewHolder"></a>ViewHolder</h3><blockquote>
+<p>容纳View视图               </p>
+</blockquote>
+<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><blockquote>
+<p>Adapter负责创建必要的ViewHolder以及绑定ViewHolder至模型层数据             </p>
+</blockquote>
+<h3 id="各成员关系："><a href="#各成员关系：" class="headerlink" title="各成员关系："></a>各成员关系：</h3><p><img src="https://github.com/xiong-ang/Android-Practice/blob/master/CriminalIntent/RecyclerView.PNG" alt=""></p>
 
       
     </div>
